@@ -1,4 +1,5 @@
 *.pdf
+!Hemanth_Rangaswamy_CV.pdf
 *.docx
 *.env
 .env.*
