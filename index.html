@@ -7,27 +7,31 @@
 <meta property="og:title" content="Hemanth Rangaswamy, Data Analyst">
 <meta property="og:description" content="Power BI, SQL, Python, R. Melbourne. RMIT Master of Data Science, IEEE published.">
 <meta property="og:type" content="website"><meta property="og:url" content="https://hemanth-gowda23.github.io/Portfolio_Gowda23/"><meta property="og:image" content="https://hemanth-gowda23.github.io/Portfolio_Gowda23/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://hemanth-gowda23.github.io/Portfolio_Gowda23/og-image.png">
-<meta name="theme-color" content="#0F1519">
+<meta name="theme-color" content="#F3E9D6">
 <title>Hemanth Rangaswamy, Data Analyst</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,100,1&family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0F1519; --bg2:#161E23; --bg3:#1D272D;
-  --line:#26333A; --line2:#38484F;
-  --ink:#E9EFEC; --ink2:#93A4A4; --ink3:#69797C;
-  --acc:#F2B705; --acc-ink:#0F1519; --accT:#F2B705; --field:#F2B705; --plot:#F2B705;
-  --disp:'Archivo',system-ui,-apple-system,sans-serif;
+  /* Night in Melbourne: dark roast brown, cream text, marigold accent */
+  --bg:#1F1812; --bg2:#291F17; --bg3:#33271D;
+  --line:#46382B; --line2:#62503D;
+  --ink:#F3E9D6; --ink2:#CDB99C; --ink3:#9D8970;
+  --acc:#E9A23B; --acc-ink:#1F1812; --accT:#E9A23B; --field:#E9A23B; --plot:#E9A23B;
+  --teal:#3F9A91; --brick:#D2663A; --shadow:#0B0805;
+  --disp:'Fraunces',Georgia,serif;
   --body:'Newsreader',Georgia,'Times New Roman',serif;
   --mono:'DM Mono',ui-monospace,'SF Mono',monospace;
   --maxw:1240px; --pad:24px;
 }
 :root[data-theme="light"]{
-  --bg:#EAEEEA; --bg2:#E0E5E0; --bg3:#D5DBD5;
-  --line:#C9D1CA; --line2:#AFBAB2;
-  --ink:#0F1519; --ink2:#4D5A5B; --ink3:#77868A;
-  --acc:#F2B705; --acc-ink:#2B1F00; --accT:#7A5A00; --field:#C0930A; --plot:#4B3800;
+  /* Bangalore to Melbourne travel poster: cream paper, marigold, brick, bay teal */
+  --bg:#F3E9D6; --bg2:#EADCC2; --bg3:#E0CFAF;
+  --line:#CFB992; --line2:#B59C72;
+  --ink:#2A1A10; --ink2:#5B4535; --ink3:#86705B;
+  --acc:#D9622B; --acc-ink:#FFF7EA; --accT:#B34818; --field:#D9622B; --plot:#2F6F6A;
+  --teal:#2F6F6A; --brick:#B34818; --shadow:#2A1A10;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -48,7 +52,7 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
 .mono{font-family:var(--mono)}
 h1,h2,h3,.state .big,.cbig,.phead .t,.cred .t,.stat .v{font-family:var(--disp);text-wrap:balance}
-h1,h2,.state .big,.cbig{font-variation-settings:'wdth' 112}
+h1,h2,.state .big,.cbig{font-variation-settings:'SOFT' 100,'WONK' 1}
 
 /* ---------- grain ---------- */
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:400;opacity:.035;
@@ -318,6 +322,53 @@ footer{border-top:1px solid var(--line);padding:26px 0 34px;font-family:var(--mo
 #roobub.hide{transform:scale(0);opacity:0}
 @media(max-width:700px){#roobud .roo{width:70px}#roobub{max-width:170px;font-size:12px;margin-bottom:44px}}
 @media print{#roobud{display:none}}
+
+/* ================= RETRO: Bangalore to Melbourne travel poster ================= */
+h1,h2,.state .big,.cbig{font-weight:900;letter-spacing:-.035em}
+h1{letter-spacing:-.04em;line-height:.9}
+.state .big em,.cbig a{font-style:italic}
+/* sunburst */
+#hero::before{content:"";position:absolute;right:-18vw;bottom:-38vw;width:90vw;height:90vw;border-radius:50%;z-index:0;opacity:.16;
+ background:repeating-conic-gradient(from 0deg,var(--acc) 0deg 6deg,transparent 6deg 15deg);
+ -webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);mask:radial-gradient(circle,#000 18%,transparent 62%);
+ animation:spin 120s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* 70s stripes = the route */
+#hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;z-index:1;
+ background:linear-gradient(var(--acc) 0 33.3%,#E9A23B 33.3% 66.6%,var(--teal) 66.6% 100%)}
+:root[data-theme="light"] #hero::after{background:linear-gradient(#D9622B 0 33.3%,#E9A23B 33.3% 66.6%,#2F6F6A 66.6% 100%)}
+/* postage stamp */
+.stamp{position:absolute;right:max(var(--pad),calc((100vw - var(--maxw))/2 + var(--pad)));top:120px;z-index:2;width:150px;height:150px;border-radius:50%;
+ border:3px dashed var(--accT);display:grid;place-items:center;text-align:center;transform:rotate(-12deg);color:var(--accT);
+ font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;line-height:1.5}
+.stamp b{display:block;font-family:var(--disp);font-size:30px;letter-spacing:-.02em;text-transform:none;line-height:1;margin:2px 0}
+@media(max-width:820px){.stamp{width:96px;height:96px;top:78px;font-size:7.5px}.stamp b{font-size:19px}.eyebrow{padding-right:104px}}
+/* chunky print buttons */
+.btn{border:2px solid var(--ink);color:var(--ink);box-shadow:4px 4px 0 var(--shadow);border-radius:12px;font-weight:700;transition:transform .15s,box-shadow .15s,background .2s,color .2s}
+:root:not([data-theme="light"]) .btn{box-shadow:4px 4px 0 var(--acc)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--shadow)}
+.btn-p{background:var(--acc);color:var(--acc-ink);border-color:var(--ink)}
+.btn-p:hover{background:var(--acc);color:var(--acc-ink)}
+.wlink{border:2px solid var(--ink);color:var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--acc)}
+.wlink:hover,.wrow:hover span.wlink{background:var(--acc);color:var(--acc-ink);border-color:var(--ink)}
+/* marquee as a ticket strip */
+.marq{background:var(--acc);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.marq span{color:var(--acc-ink);font-weight:500}
+.marq span::after{background:var(--acc-ink)}
+/* badges and tags */
+.badge{border:2px solid var(--ink);border-radius:6px;background:#E9A23B;color:#2A1A10}
+.badge.g{border:2px dashed var(--line2);border-radius:6px}
+.tag{border-radius:6px}
+/* chart and cards feel printed */
+.plot{border:2px solid var(--ink);border-radius:14px;box-shadow:6px 6px 0 var(--acc)}
+.shead .n{color:var(--teal)}
+:root:not([data-theme="light"]) .shead .n{color:var(--teal)}
+.stat .v em{color:var(--accT)}
+.pill i,.brand i{background:var(--teal)}
+#prog{height:4px;background:linear-gradient(90deg,#D9622B,#E9A23B,#2F6F6A)}
+/* colour story */
+.colours{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.colours i{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid var(--ink);margin-right:5px;vertical-align:-2px}
 </style>
 </head>
 <body>
@@ -341,8 +392,9 @@ footer{border-top:1px solid var(--line);padding:26px 0 34px;font-family:var(--mo
 
 <header id="hero">
   <canvas id="field" aria-hidden="true"></canvas>
+  <div class="stamp" aria-hidden="true"><div>Route<b>BLR &rarr; MEL</b>Data analyst<br>Melbourne</div></div>
   <div class="wrap">
-    <div class="eyebrow">Melbourne, Australia <b>/</b> Full working rights <b>/</b> Available now</div>
+    <div class="eyebrow">Bangalore <b>&rarr;</b> Melbourne <b>/</b> Full working rights <b>/</b> Available now</div>
     <h1>
       <span class="ln"><span>Hemanth</span></span>
       <span class="ln"><span>Rangaswamy</span></span>
@@ -612,6 +664,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 34px;font-family:var(--mo
 <div class="wrap">
   <footer>
     <span>2026 Hemanth Rangaswamy, Melbourne</span>
+    <span class="colours"><span><i style="background:#D9622B"></i>Bangalore marigold</span><span><i style="background:#B34818"></i>Melbourne brick</span><span><i style="background:#2F6F6A"></i>Port Phillip teal</span><span><i style="background:#F3E9D6"></i>Letters home</span></span>
     <span>Built by hand, AI-assisted</span>
   </footer>
 </div>
@@ -629,7 +682,8 @@ function el(n,a){ var e=document.createElementNS(NS,n); for(var k in a) e.setAtt
 
 /* ---------- theme ---------- */
 var tog=document.getElementById('tog');
-try{ if(localStorage.getItem('hr-theme')==='light'){ root.setAttribute('data-theme','light'); tog.textContent='Dark'; } }catch(e){}
+var pref='light';try{ if(localStorage.getItem('hr-theme')==='dark') pref='dark'; }catch(e){}
+if(pref==='light'){ root.setAttribute('data-theme','light'); tog.textContent='Dark'; }
 tog.addEventListener('click',function(){
   var lit = root.getAttribute('data-theme')==='light';
   if(lit){ root.removeAttribute('data-theme'); tog.textContent='Light'; }
