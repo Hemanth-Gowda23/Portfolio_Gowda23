@@ -278,6 +278,46 @@ footer{border-top:1px solid var(--line);padding:26px 0 34px;font-family:var(--mo
 .rv{transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}h1 .ln>span{transform:none}}
+/* MASCOT: Roo */
+.roo svg{display:block;width:100%;height:auto;overflow:visible}
+.roo .body-g{transform-origin:60px 130px;transform-box:view-box;animation:breathe 3.2s ease-in-out infinite}
+.roo .tail{transform-origin:44px 104px;transform-box:view-box;animation:sway 2.6s ease-in-out infinite}
+.roo .earL{transform-origin:58px 34px;transform-box:view-box;animation:twitch 5s ease-in-out infinite}
+.roo .earR{transform-origin:70px 32px;transform-box:view-box;animation:twitch 5s ease-in-out .4s infinite}
+.roo .eyes{transform-origin:70px 46px;transform-box:view-box;animation:blink 4.5s infinite}
+.roo .arm{transform-origin:70px 80px;transform-box:view-box;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.roo .arm2{transform-origin:56px 80px;transform-box:view-box;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.roo .pb{transform-box:fill-box;transform-origin:bottom;animation:grow 2.4s ease-in-out infinite}
+.roo .pb:nth-child(2){animation-delay:.3s}.roo .pb:nth-child(3){animation-delay:.6s}
+.roo .happy,.roo .sad{display:none}
+.roo.cheer .eyes,.roo.facepalm .eyes{display:none}
+.roo.cheer .happy{display:inline}.roo.facepalm .sad{display:inline}
+.roo.point .arm{transform:rotate(-18deg)}
+.roo.wave .arm{animation:wave .5s ease-in-out 4}
+.roo.cheer .arm{transform:rotate(-95deg)}.roo.cheer .arm2{transform:rotate(80deg)}
+.roo.cheer svg{animation:jump .55s ease 3}
+.roo.facepalm .arm{transform:rotate(-128deg) translate(4px,-4px)}
+.roo.facepalm .body-g{animation:none;transform:rotate(-4deg)}
+.roo.think .arm{transform:rotate(-110deg)}
+.roo.hop svg{animation:hop .6s ease}
+@keyframes breathe{50%{transform:scale(1.02,.985)}}
+@keyframes sway{50%{transform:rotate(9deg)}}
+@keyframes twitch{0%,86%,100%{transform:rotate(0)}90%{transform:rotate(-14deg)}94%{transform:rotate(6deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes grow{50%{transform:scaleY(.55)}}
+@keyframes wave{50%{transform:rotate(-70deg)}}
+@keyframes jump{40%{transform:translateY(-26px) rotate(-4deg)}70%{transform:translateY(0) scale(1.05,.94)}}
+@keyframes hop{0%{transform:translateY(0)}30%{transform:translateY(-30px) scale(.96,1.05)}60%{transform:translateY(0) scale(1.08,.92)}100%{transform:none}}
+
+#roobud{position:fixed;right:18px;bottom:12px;z-index:300;display:flex;align-items:flex-end;gap:6px;pointer-events:none;transform:translateY(160%);opacity:0;transition:transform .6s cubic-bezier(.3,1.4,.5,1),opacity .4s}
+#roobud.on{transform:none;opacity:1}
+#roobud .roo{width:104px;pointer-events:auto;cursor:pointer}
+#roobub{pointer-events:auto;max-width:240px;background:#FFFAF2;color:#0F1519;border:2px solid #0F1519;border-radius:18px 18px 4px 18px;padding:10px 14px;font:700 13.5px/1.35 system-ui,sans-serif;margin-bottom:66px;box-shadow:4px 4px 0 var(--acc);transform-origin:bottom right;transition:transform .3s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+#roobub a{color:#0F1519;text-decoration:underline}
+#roobub.pop{animation:bpop .4s cubic-bezier(.3,1.6,.5,1)}
+#roobub.hide{transform:scale(0);opacity:0}
+@media(max-width:700px){#roobud .roo{width:70px}#roobub{max-width:170px;font-size:12px;margin-bottom:44px}}
+@media print{#roobud{display:none}}
 </style>
 </head>
 <body>
@@ -575,6 +615,7 @@ footer{border-top:1px solid var(--line);padding:26px 0 34px;font-family:var(--mo
     <span>Built by hand, AI-assisted</span>
   </footer>
 </div>
+<div id="roobud" aria-live="polite"><div id="roobub"></div><div class="roo" id="roo" title="Tap Roo" role="button" tabindex="0" aria-label="Roo, the site guide"></div></div>
 
 <script>
 (function(){
@@ -925,6 +966,54 @@ drawChart(true);
 drawSparks();
 drawVizzes();
 setTimeout(function(){ if(!chartDrawn){ chartDrawn=true; drawChart(false); } }, reduce?200:2900);
+})();
+</script>
+
+<script>
+(function(){
+function rooSVG(){return '<svg viewBox="0 0 120 140" aria-hidden="true">'+
+   '<ellipse cx="62" cy="134" rx="34" ry="4" fill="#000" opacity=".15"/>'+
+   '<g class="body-g">'+
+   '<path class="tail" d="M44 104 Q12 112 2 88 Q8 84 12 92 Q22 106 48 96 Z" fill="#c9652c"/>'+
+   '<g class="arm2"><path d="M56 80 Q46 90 44 98" stroke="#c9652c" stroke-width="7" stroke-linecap="round" fill="none"/></g>'+
+   '<ellipse cx="60" cy="96" rx="28" ry="32" fill="#e07a3a"/>'+
+   '<ellipse cx="64" cy="100" rx="17" ry="22" fill="#f7e3c4"/>'+
+   '<g><rect class="pb" x="56" y="98" width="4.5" height="11" rx="1.5" fill="#008a72"/><rect class="pb" x="62" y="94" width="4.5" height="15" rx="1.5" fill="#f5b82e"/><rect class="pb" x="68" y="101" width="4.5" height="8" rx="1.5" fill="#e2572b"/></g>'+
+   '<path d="M49 106 Q64 124 79 106 Z" fill="#ecc998"/>'+
+   '<ellipse cx="50" cy="127" rx="17" ry="6" fill="#c9652c"/><ellipse cx="76" cy="128" rx="17" ry="6" fill="#c9652c"/>'+
+   '<path class="earL" d="M54 38 Q42 6 56 8 Q63 20 63 36 Z" fill="#e07a3a"/><path d="M55 32 Q49 14 56 13 Q60 22 60 32 Z" fill="#f4a9a0"/>'+
+   '<path class="earR" d="M66 34 Q68 2 82 8 Q78 22 73 36 Z" fill="#e07a3a"/><path d="M69 30 Q71 12 78 12 Q75 22 72 31 Z" fill="#f4a9a0"/>'+
+   '<ellipse cx="68" cy="50" rx="21" ry="19" fill="#e07a3a"/>'+
+   '<ellipse cx="83" cy="57" rx="13" ry="9.5" fill="#f7e3c4"/>'+
+   '<ellipse cx="94" cy="53" rx="4" ry="3" fill="#10261f"/>'+
+   '<path d="M84 63 Q88 66 93 61" stroke="#10261f" stroke-width="2" fill="none" stroke-linecap="round"/>'+
+   '<circle cx="75" cy="60" r="3.5" fill="#f4a9a0" opacity=".8"/>'+
+   '<g class="eyes"><circle cx="64" cy="47" r="2.6" fill="#10261f"/><circle cx="80" cy="46" r="2.6" fill="#10261f"/><circle cx="65" cy="46" r=".9" fill="#fff"/><circle cx="81" cy="45" r=".9" fill="#fff"/></g>'+
+   '<g class="happy"><path d="M60 48 Q64 43 68 48" stroke="#10261f" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M76 47 Q80 42 84 47" stroke="#10261f" stroke-width="2.2" fill="none" stroke-linecap="round"/></g>'+
+   '<g class="sad"><path d="M60 47 L68 48" stroke="#10261f" stroke-width="2.2" stroke-linecap="round"/><path d="M76 46 L84 47" stroke="#10261f" stroke-width="2.2" stroke-linecap="round"/></g>'+
+   '<circle cx="64" cy="47" r="7.5" fill="rgba(255,255,255,.25)" stroke="#10261f" stroke-width="2.4"/><circle cx="80" cy="46" r="7.5" fill="rgba(255,255,255,.25)" stroke="#10261f" stroke-width="2.4"/><path d="M71.5 46.5 L72.5 46.5" stroke="#10261f" stroke-width="2.4"/>'+
+   '<g class="arm"><path d="M70 80 Q84 86 94 80" stroke="#c9652c" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="95" cy="79" r="5" fill="#c9652c"/></g>'+
+   '</g></svg>';}
+  
+var bud=document.getElementById('roobud'),roo=document.getElementById('roo'),bub=document.getElementById('roobub'),T;
+roo.innerHTML=rooSVG();
+function say(t,pose,ms){bub.classList.remove('hide','pop');void bub.offsetWidth;bub.innerHTML=t;bub.classList.add('pop');
+ roo.className='roo hop';void roo.offsetWidth;setTimeout(function(){roo.className='roo '+(pose||'');},620);
+ clearTimeout(T);T=setTimeout(function(){roo.className='roo';bub.classList.add('hide');},ms||5000);}
+var lines={work:['G&#39;day! I&#39;m Roo. Every project here has a <b>View code</b> button. Go on, have a look.','point'],
+ live:['This chart is drawn live from 36 years of RBA data. Hover it!','point'],
+ experience:['From intern to Business Analyst in a few months. Not bad, eh?','wave'],
+ skills:['SQL, Python, Power BI, R. Hemanth uses them every day.','think'],
+ credentials:['Master of Data Science, RMIT. And an IEEE paper.','point'],
+ contact:['Liked what you saw? <a href="mailto:hemanthkvt9@gmail.com">Say hi to Hemanth</a>!','wave']};
+var hero=document.getElementById('hero'),seen={};
+new IntersectionObserver(function(es){es.forEach(function(e){bud.classList.toggle('on',!e.isIntersecting);});},{threshold:.2}).observe(hero);
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!seen[e.target.id]&&lines[e.target.id]){seen[e.target.id]=1;var l=lines[e.target.id];say(l[0],l[1]);}});},{rootMargin:'-40% 0px -40% 0px'});
+Object.keys(lines).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
+var tips=['New: <a href="australia-ai.html">why Australia leads the world in AI use</a>. I am in it too!','I keep the data in my pouch.','Kangaroos cannot walk backwards. Neither does good data.','Want the CV? <a href="Hemanth_Rangaswamy_CV.pdf" target="_blank" rel="noopener">Here you go</a>.'],ti=0;
+function tap(){say(tips[ti++%tips.length],'cheer',4500);}
+roo.addEventListener('click',tap);roo.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tap();}});
+bub.classList.add('hide');
 })();
 </script>
 </body>
