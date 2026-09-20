@@ -323,6 +323,58 @@ footer{border-top:1px solid var(--line);padding:26px 0 34px;font-family:var(--mo
 @media(max-width:700px){#roobud .roo{width:70px}#roobub{max-width:170px;font-size:12px;margin-bottom:44px}}
 @media print{#roobud{display:none}}
 
+/* ---------- route: autos to trams ---------- */
+.rt-em{font-style:italic;color:var(--accT)}
+.rt-intro{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:center;margin-bottom:34px}
+@media(max-width:760px){.rt-intro{grid-template-columns:1fr;gap:20px}}
+.rt-photo{position:relative;width:240px;margin:0 auto;padding:14px 14px 38px;background:var(--bg2);border:2px solid var(--ink);box-shadow:6px 6px 0 var(--acc);transform:rotate(-3deg)}
+.rt-photo img{display:block;width:100%;height:auto;background:#F3E9D6;filter:sepia(.15)}
+.rt-photo figcaption{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.rt-photo::before{content:"";position:absolute;top:-12px;left:50%;width:70px;height:22px;margin-left:-35px;background:color-mix(in srgb,var(--acc) 55%,transparent);transform:rotate(4deg)}
+.rt-text p{font-size:clamp(1rem,1.7vw,1.15rem);color:var(--ink2);max-width:58ch;margin-bottom:14px}
+.rt-scene{border:2px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:6px 6px 0 var(--teal)}
+.rt-scene svg{display:block;width:100%;height:auto}
+.rt-sky{fill:#F7DDB0}
+:root:not([data-theme="light"]) .rt-sky{fill:#2B2119}
+.rt-sun{fill:#E9A23B;opacity:.55}.rt-sunring{fill:none;stroke:#D9622B;stroke-width:3;stroke-dasharray:4 10;opacity:.6}
+.rt-city{fill:#C98C5A;opacity:.55}
+:root:not([data-theme="light"]) .rt-city{fill:#5A4432;opacity:.9}
+.rt-palm{fill:none;stroke:#2F6F6A;stroke-width:5;stroke-linecap:round;opacity:.9}
+.rt-lab{font:800 22px var(--mono);letter-spacing:.2em;fill:var(--ink)}
+.rt-sub{font:400 13px var(--mono);letter-spacing:.06em;fill:var(--ink2)}
+.rt-fly{fill:none;stroke:var(--ink2);stroke-width:2;stroke-dasharray:6 8}
+.rt-plane{fill:var(--ink)}
+.rt-ground{fill:#D9B98C}
+:root:not([data-theme="light"]) .rt-ground{fill:#3A2E23}
+.rt-road{fill:#4A3B2E}.rt-dash{stroke:#F3E9D6;stroke-width:3;stroke-dasharray:18 14}
+.rt-rail{stroke:#6B5540;stroke-width:4}.rt-wire{stroke:#2A1A10;stroke-width:1.5}
+:root:not([data-theme="light"]) .rt-wire{stroke:#CDB99C}
+.rt-veh{cursor:pointer;outline:none}
+.rt-auto-body{fill:#2E7D46;stroke:#2A1A10;stroke-width:3}
+.rt-auto-hood{fill:#F2C230;stroke:#2A1A10;stroke-width:3}
+.rt-auto-top{fill:#2A1A10}
+.rt-glass{fill:#CFE7EA;stroke:#2A1A10;stroke-width:2.5}
+.rt-stripe{stroke:#2A1A10;stroke-width:3}
+.rt-lamp{fill:#FFF4C2;stroke:#2A1A10;stroke-width:2}
+.rt-plate{font:700 11px var(--mono);fill:#F3E9D6}
+.rt-wheel circle{fill:#2A1A10;stroke:#6B5540;stroke-width:3}.rt-wheel path{stroke:#9D8970;stroke-width:2}
+.rt-tram-body{fill:#2F6B45;stroke:#2A1A10;stroke-width:3}
+.rt-tram-top{fill:#E6CF8E;stroke:#2A1A10;stroke-width:3}
+.rt-tram-band{fill:#2F6B45}
+.rt-win rect{fill:#CFE7EA;stroke:#2A1A10;stroke-width:2}
+.rt-sign{fill:#2A1A10}.rt-signt{font:700 9px var(--mono);fill:#F2C230;letter-spacing:.1em}
+.rt-pole{stroke:#2A1A10;stroke-width:3}
+:root:not([data-theme="light"]) .rt-pole{stroke:#CDB99C}
+.rt-say{opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+.rt-say rect{fill:#FFFAF2;stroke:#2A1A10;stroke-width:2.5}.rt-say text{font:800 15px var(--mono);fill:#2A1A10}
+.rt-veh.talk .rt-say{opacity:1}
+.rt-bob{animation:rtbob .5s ease-in-out infinite alternate;animation-play-state:paused}
+.rt-veh.move .rt-bob{animation-play-state:running}
+@keyframes rtbob{to{transform:translateY(-2.5px)}}
+.rt-now rect{fill:var(--acc);stroke:#2A1A10;stroke-width:2}.rt-now text{font:700 12px var(--mono);letter-spacing:.12em;fill:var(--acc-ink)}
+@media (prefers-reduced-motion:reduce){.rt-bob{animation:none}}
+@media(max-width:600px){.rt-sub{display:none}.rt-lab{font-size:34px}.rt-now text{font-size:16px}}
+
 /* ================= RETRO: Bangalore to Melbourne travel poster ================= */
 h1,h2,.state .big,.cbig{font-weight:900;letter-spacing:-.035em}
 h1{letter-spacing:-.04em;line-height:.9}
@@ -379,6 +431,7 @@ h1{letter-spacing:-.04em;line-height:.9}
   <div class="navin">
     <div class="brand">HR<i></i></div>
     <div class="nlinks">
+      <a href="#route">Route</a>
       <a href="#work">Work</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
@@ -424,6 +477,96 @@ h1{letter-spacing:-.04em;line-height:.9}
   <div class="stat"><div class="v"><em id="s3">0</em></div><div class="k">Years of monetary policy data modelled in Power BI</div></div>
   <div class="stat"><div class="v"><em id="s4">0</em></div><div class="k">Multi tenant platform taken to production</div></div>
 </div>
+
+<section id="route">
+  <div class="wrap">
+    <div class="shead rv">
+      <div class="n">My route</div>
+      <h2>From autos to <em class="rt-em">trams</em></h2>
+      <div class="note">Scroll to ride along</div>
+    </div>
+    <div class="rt-intro rv">
+      <figure class="rt-photo">
+        <img src="hemanth-sketch.webp" alt="Pencil style portrait of Hemanth Rangaswamy" width="543" height="560" loading="lazy">
+        <figcaption>Hemanth, in pencil</figcaption>
+      </figure>
+      <div class="rt-text">
+        <p>I come from Bengaluru, where I studied Information Science engineering and got hooked on data. In 2024 I moved to Melbourne for a Master of Data Science at RMIT.</p>
+        <p>Since then I have worked as a data analyst intern and then a business analyst, cleaning messy data and turning it into reports people can act on. Different city, same habit: find the story in the numbers.</p>
+      </div>
+    </div>
+    <div class="rt-scene rv" id="rtScene">
+      <svg viewBox="0 0 1200 420" id="rtSvg" role="img" aria-label="Illustration: an auto rickshaw drives through Bengaluru, a plane flies to Melbourne, and a Melbourne tram rolls on">
+        <defs>
+          <clipPath id="rtClip"><rect x="0" y="0" width="1200" height="420" rx="18"/></clipPath>
+        </defs>
+        <g clip-path="url(#rtClip)">
+          <rect width="1200" height="420" class="rt-sky"/>
+          <!-- sun -->
+          <g transform="translate(600 250)"><circle r="120" class="rt-sun"/><circle r="120" class="rt-sunring"/></g>
+          <!-- Bengaluru skyline -->
+          <g class="rt-city">
+            <rect x="40" y="200" width="70" height="100"/><rect x="120" y="170" width="46" height="130"/>
+            <path d="M190 300V215h120v85z"/><path d="M200 215h100l-10-22h-80z"/><path d="M230 193a20 20 0 0 1 40 0z"/><rect x="247" y="160" width="6" height="14"/>
+            <rect x="330" y="185" width="50" height="115"/><rect x="390" y="215" width="60" height="85"/>
+            <path d="M470 300c0-40 6-70 10-90M480 210c-20-6-34 2-42 12M480 210c-4-18-18-26-32-24M480 210c14-14 30-14 40-6M480 210c18 0 30 10 34 22" class="rt-palm"/>
+          </g>
+          <!-- Melbourne skyline -->
+          <g class="rt-city">
+            <rect x="740" y="160" width="40" height="140"/><rect x="786" y="120" width="34" height="180"/><path d="M826 300V96l30-20v224z"/>
+            <rect x="862" y="170" width="54" height="130"/><rect x="922" y="140" width="38" height="160"/><path d="M966 300V190l40-16v126z"/>
+            <rect x="1012" y="205" width="60" height="95"/><rect x="1078" y="150" width="36" height="150"/><rect x="1120" y="195" width="60" height="105"/>
+          </g>
+          <!-- labels -->
+          <text x="60" y="60" class="rt-lab">BENGALURU</text><text x="60" y="84" class="rt-sub">B.E. Information Science, 2019 to 2023</text>
+          <text x="1140" y="60" class="rt-lab" text-anchor="end">MELBOURNE</text><text x="1140" y="84" class="rt-sub" text-anchor="end">Master of Data Science, RMIT, 2024 to 2025</text>
+          <!-- flight path -->
+          <path id="rtPath" d="M430 250 C 520 40, 700 40, 790 250" class="rt-fly"/>
+          <g id="rtPlane"><path d="M-16 0 L14 -3 L18 0 L14 3Z M-2 -1 L-8 -14 L-3 -14 L6 -1Z M-2 1 L-8 14 L-3 14 L6 1Z M-14 -1 L-18 -7 L-15 -7 L-10 -1Z M-14 1 L-18 7 L-15 7 L-10 1Z" class="rt-plane"/></g>
+          <!-- ground: road left, tram tracks right -->
+          <rect x="0" y="300" width="1200" height="120" class="rt-ground"/>
+          <rect x="0" y="330" width="560" height="44" class="rt-road"/>
+          <path d="M20 352H540" class="rt-dash"/>
+          <path d="M640 357H1200M640 365H1200" class="rt-rail"/>
+          <path d="M640 221H1200" class="rt-wire"/>
+          <!-- auto rickshaw -->
+          <g id="rtAuto" class="rt-veh" tabindex="0" role="button" aria-label="Auto rickshaw. Tap to honk">
+            <g class="rt-bob">
+              <path d="M8 88 Q10 52 44 40 L118 36 Q140 36 146 60 L156 92 Q158 100 150 100 L16 100 Q6 100 8 88Z" class="rt-auto-body"/>
+              <path d="M30 42 Q40 10 84 8 Q130 8 140 40 L128 40 Q120 20 84 20 Q52 22 42 44Z" class="rt-auto-top"/>
+              <path d="M22 44 Q28 18 84 14 Q134 14 144 44 L146 60 L22 60Z" class="rt-auto-hood"/>
+              <path d="M120 44 L140 44 L150 80 L120 80Z" class="rt-glass"/>
+              <path d="M12 76 H150" class="rt-stripe"/>
+              <circle cx="152" cy="84" r="4" class="rt-lamp"/>
+              <text x="60" y="94" class="rt-plate">KA 01</text>
+            </g>
+            <g class="rt-wheel" transform="translate(40 104)"><circle r="15"/><path d="M-15 0H15M0 -15V15"/></g>
+            <g class="rt-wheel" transform="translate(134 104)"><circle r="15"/><path d="M-15 0H15M0 -15V15"/></g>
+            <g class="rt-say" transform="translate(40 -18)"><rect x="-6" y="-26" width="118" height="30" rx="10"/><text x="53" y="-6" text-anchor="middle">Poom poom!</text></g>
+          </g>
+          <!-- tram -->
+          <g id="rtTram" class="rt-veh" tabindex="0" role="button" aria-label="Melbourne tram. Tap to ring the bell">
+            <path d="M200 -20 L150 26" class="rt-pole"/>
+            <g class="rt-bob">
+              <rect x="0" y="26" width="250" height="74" rx="14" class="rt-tram-body"/>
+              <rect x="0" y="26" width="250" height="30" rx="14" class="rt-tram-top"/>
+              <rect x="14" y="40" width="222" height="6" class="rt-tram-band"/>
+              <g class="rt-win"><rect x="18" y="52" width="30" height="24" rx="3"/><rect x="56" y="52" width="30" height="24" rx="3"/><rect x="94" y="52" width="30" height="24" rx="3"/><rect x="132" y="52" width="30" height="24" rx="3"/><rect x="170" y="52" width="30" height="24" rx="3"/><rect x="208" y="52" width="28" height="24" rx="3"/></g>
+              <rect x="86" y="30" width="78" height="12" rx="3" class="rt-sign"/><text x="125" y="39.5" text-anchor="middle" class="rt-signt">CITY</text>
+            </g>
+            <g class="rt-wheel" transform="translate(48 104)"><circle r="11"/><path d="M-11 0H11M0 -11V11"/></g>
+            <g class="rt-wheel" transform="translate(76 104)"><circle r="11"/><path d="M-11 0H11M0 -11V11"/></g>
+            <g class="rt-wheel" transform="translate(174 104)"><circle r="11"/><path d="M-11 0H11M0 -11V11"/></g>
+            <g class="rt-wheel" transform="translate(202 104)"><circle r="11"/><path d="M-11 0H11M0 -11V11"/></g>
+            <g class="rt-say" transform="translate(70 -8)"><rect x="-6" y="-26" width="104" height="30" rx="10"/><text x="46" y="-6" text-anchor="middle">Ding ding!</text></g>
+          </g>
+          <!-- now marker -->
+          <g class="rt-now" transform="translate(1160 412)"><rect x="-150" y="-36" width="150" height="28" rx="6"/><text x="-75" y="-17" text-anchor="middle">NOW: OPEN TO WORK</text></g>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
 
 <div class="wrap">
   <div class="state">
@@ -1054,7 +1197,7 @@ roo.innerHTML=rooSVG();
 function say(t,pose,ms){bub.classList.remove('hide','pop');void bub.offsetWidth;bub.innerHTML=t;bub.classList.add('pop');
  roo.className='roo hop';void roo.offsetWidth;setTimeout(function(){roo.className='roo '+(pose||'');},620);
  clearTimeout(T);T=setTimeout(function(){roo.className='roo';bub.classList.add('hide');},ms||5000);}
-var lines={work:['G&#39;day! I&#39;m Roo. Every project here has a <b>View code</b> button. Go on, have a look.','point'],
+var lines={route:['That is Hemanth in pencil. Tap the auto and the tram!','point'],work:['G&#39;day! I&#39;m Roo. Every project here has a <b>View code</b> button. Go on, have a look.','point'],
  live:['This chart is drawn live from 36 years of RBA data. Hover it!','point'],
  experience:['From intern to Business Analyst in a few months. Not bad, eh?','wave'],
  skills:['SQL, Python, Power BI, R. Hemanth uses them every day.','think'],
@@ -1070,5 +1213,31 @@ roo.addEventListener('click',tap);roo.addEventListener('keydown',function(e){if(
 bub.classList.add('hide');
 })();
 </script>
+<script>
+(function(){
+  var scene=document.getElementById('rtScene'); if(!scene) return;
+  var auto=document.getElementById('rtAuto'), tram=document.getElementById('rtTram'), plane=document.getElementById('rtPlane'), path=document.getElementById('rtPath');
+  var L=path.getTotalLength(), reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var wheels=function(g){return g.querySelectorAll('.rt-wheel');};
+  function place(g,x,y,dist){g.setAttribute('transform','translate('+x+' '+y+')');wheels(g).forEach(function(w){var t=w.getAttribute('transform').split(')')[0]+')';w.setAttribute('transform',t+' rotate('+(dist*3%360)+')');});}
+  function lerp(a,b,t){return a+(b-a)*Math.max(0,Math.min(1,t));}
+  var lastA=null,lastT=null,timerA,timerT;
+  function draw(p){
+    var ax=lerp(-180,300,p/0.42); place(auto,ax,226,ax);
+    var fp=Math.max(0,Math.min(1,(p-0.38)/0.3)), pt=path.getPointAtLength(fp*L), pt2=path.getPointAtLength(Math.min(L,fp*L+1));
+    var ang=Math.atan2(pt2.y-pt.y,pt2.x-pt.x)*180/Math.PI;
+    plane.setAttribute('transform','translate('+pt.x+' '+pt.y+') rotate('+ang+')'); plane.style.opacity=(fp>0&&fp<1)?1:(fp>=1?0:0.001);
+    var tx=lerp(1240,860,(p-0.62)/0.38); place(tram,tx,240,tx);
+    if(lastA!==null&&Math.abs(ax-lastA)>0.5){auto.classList.add('move');clearTimeout(timerA);timerA=setTimeout(function(){auto.classList.remove('move')},180);}
+    if(lastT!==null&&Math.abs(tx-lastT)>0.5){tram.classList.add('move');clearTimeout(timerT);timerT=setTimeout(function(){tram.classList.remove('move')},180);}
+    lastA=ax;lastT=tx;
+  }
+  function onScroll(){var r=scene.getBoundingClientRect(),vh=innerHeight;var p=(vh-r.top)/(vh+r.height*0.2);draw(Math.max(0,Math.min(1,p*1.15-0.1)));}
+  if(reduce){draw(1);}else{addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();}
+  function talk(g){g.classList.add('talk');setTimeout(function(){g.classList.remove('talk')},1400);}
+  [auto,tram].forEach(function(g){g.addEventListener('click',function(){talk(g)});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();talk(g);}});});
+})();
+</script>
+
 </body>
 </html>
