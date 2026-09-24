@@ -77,6 +77,32 @@ details{margin-top:6px;font-size:13px;color:var(--ink2)}
 details table{border-collapse:collapse;margin-top:6px;width:100%}
 details td,details th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
 details td:last-child,details th:last-child{text-align:right}
+
+.rootip{display:flex;gap:10px;align-items:flex-start;margin:16px 0}
+.rootip .rh{width:52px;height:64px;flex:none}
+.rootip .bub{background:var(--card);border:1px solid var(--line);border-radius:14px;border-top-left-radius:4px;padding:10px 14px;font-size:15px;color:var(--ink2)}
+.rootip .bub b{color:var(--orange)}
+.game{background:var(--card);border:2px solid var(--yellow);border-radius:16px;padding:20px;margin:18px 0}
+.game .q{font-weight:800;font-size:19px;line-height:1.35;margin-bottom:14px}
+.game .val{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:48px;line-height:1;color:var(--ink)}
+.game input[type=range]{width:100%;accent-color:var(--orange);height:28px;margin:10px 0 4px}
+.game .ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+.gbtn{font:700 15px Inter,sans-serif;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:10px 18px;cursor:pointer;margin-top:12px}
+.gbtn.alt{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+.opts{display:flex;gap:10px;flex-wrap:wrap}
+.opts button{flex:1 1 200px;font:700 15px Inter,sans-serif;background:var(--bg);color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;text-align:left}
+.opts button:hover{border-color:var(--ink2)}
+.opts button.right{border-color:var(--green);background:var(--green-soft)}
+.opts button.wrong{border-color:var(--orange)}
+.reveal{display:none;margin-top:16px}
+.reveal.on{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.rbar{margin:8px 0}
+.rbar .lab{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.rbar .trk{height:22px;background:var(--grid);border-radius:6px;overflow:hidden;margin-top:4px}
+.rbar .fill{height:100%;width:0;border-radius:6px;transition:width .9s ease}
+.verdict{font-weight:700;margin-top:10px}
+@media (prefers-reduced-motion: reduce){.rbar .fill{transition:none}.reveal.on{animation:none}}
 @media (max-width:620px){
   .hero .wrap{grid-template-columns:1fr 90px}
   .roo{width:90px}
@@ -150,12 +176,23 @@ details td:last-child,details th:last-child{text-align:right}
     <div class="now"><b>Chapter 3 · now</b>When a report says "Australia uses AI", who is Australia?</div>
   </div>
 
-  <h2>The gap in one line</h2>
-  <p>Same country. Often the same family. Very different weeks.</p>
-  <div class="big">
-    <div class="stat g"><div class="n">69.1%</div><div class="l">of Australians aged 18 to 34 use generative AI</div></div>
-    <div class="stat o"><div class="n">15.5%</div><div class="l">of Australians aged 65 to 74 do</div></div>
+  <h2>Before you scroll: guess</h2>
+  <p>69.1% of Australians aged 18 to 34 use generative AI. What about their parents and grandparents?</p>
+  <div class="game" id="g1">
+    <div class="q">What share of Australians aged 65 to 74 do you think use generative AI?</div>
+    <div class="val"><span id="g1v">50</span>%</div>
+    <input type="range" id="g1r" min="0" max="100" value="50" aria-label="Your guess, in percent">
+    <div class="ends"><span>0%</span><span>100%</span></div>
+    <button class="gbtn" id="g1b">Lock in my guess</button>
+    <div class="reveal" id="g1out" aria-live="polite">
+      <div class="rbar"><div class="lab"><span>Your guess</span><span id="g1gv"></span></div><div class="trk"><div class="fill" id="g1gf" style="background:var(--muted)"></div></div></div>
+      <div class="rbar"><div class="lab"><span>Aged 65 to 74 (real)</span><span>15.5%</span></div><div class="trk"><div class="fill" data-w="15.5" style="background:var(--orange)"></div></div></div>
+      <div class="rbar"><div class="lab"><span>Aged 18 to 34 (real)</span><span>69.1%</span></div><div class="trk"><div class="fill" data-w="69.1" style="background:var(--green)"></div></div></div>
+      <div class="verdict" id="g1verdict"></div>
+      <button class="gbtn alt" id="g1again">Try again</button>
+    </div>
   </div>
+<div class="rootip"><svg class="rh" viewBox="60 0 120 150" aria-hidden="true"><path d="M86 70 C76 40 80 14 92 4 C104 16 106 44 102 72 Z" fill="#E07A34"/><path d="M90 64 C84 42 86 24 93 16 C100 26 100 46 98 64 Z" fill="#F2A7A0"/><path d="M120 70 C122 40 134 16 150 10 C156 26 148 52 134 74 Z" fill="#E07A34"/><path d="M124 66 C128 44 136 28 146 20 C148 34 142 52 132 68 Z" fill="#F2A7A0"/><ellipse cx="112" cy="100" rx="44" ry="40" fill="#E07A34"/><ellipse cx="140" cy="114" rx="26" ry="18" fill="#F8E6C8"/><ellipse cx="162" cy="106" rx="7" ry="6" fill="#1B1F1C"/><path d="M138 124 Q148 132 158 124" stroke="#1B1F1C" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="100" cy="96" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/><circle cx="134" cy="92" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/><circle cx="103" cy="98" r="5" fill="#1B1F1C"/><circle cx="137" cy="94" r="5" fill="#1B1F1C"/></svg><div class="bub"><b>Roo:</b> Same country. Often the same family. Very different weeks. Keep your guess in mind for the next chart.</div></div>
 
   <h2>Four gaps</h2>
   <p>Each line is one gap. The green dot is the group furthest ahead. The orange dot is the group furthest behind. Hover or tap a dot for the number.</p>
@@ -165,6 +202,8 @@ details td:last-child,details th:last-child{text-align:right}
     <div class="chart" id="dumbbell"></div>
     <details><summary>See the numbers as a table</summary><table id="t-dumb"></table></details>
   </figure>
+
+<div class="rootip"><svg class="rh" viewBox="60 0 120 150" aria-hidden="true"><path d="M86 70 C76 40 80 14 92 4 C104 16 106 44 102 72 Z" fill="#E07A34"/><path d="M90 64 C84 42 86 24 93 16 C100 26 100 46 98 64 Z" fill="#F2A7A0"/><path d="M120 70 C122 40 134 16 150 10 C156 26 148 52 134 74 Z" fill="#E07A34"/><path d="M124 66 C128 44 136 28 146 20 C148 34 142 52 132 68 Z" fill="#F2A7A0"/><ellipse cx="112" cy="100" rx="44" ry="40" fill="#E07A34"/><ellipse cx="140" cy="114" rx="26" ry="18" fill="#F8E6C8"/><ellipse cx="162" cy="106" rx="7" ry="6" fill="#1B1F1C"/><path d="M138 124 Q148 132 158 124" stroke="#1B1F1C" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="100" cy="96" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/><circle cx="134" cy="92" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/><circle cx="103" cy="98" r="5" fill="#1B1F1C"/><circle cx="137" cy="94" r="5" fill="#1B1F1C"/></svg><div class="bub"><b>Roo:</b> Look at Education. Go from a degree to Year 10 and use drops from about 6 in 10 people to 1 in 25.</div></div>
 
   <h2>Pick a gap and look closer</h2>
   <p>Bars in green mean most people in that group already use AI. Orange means most do not yet.</p>
@@ -181,7 +220,19 @@ details td:last-child,details th:last-child{text-align:right}
   <p>Small business shows the same pattern. About <b>43%</b> of small and medium businesses use AI. In health, education and services it is above half. In construction and agriculture it is below 30%.</p>
 
   <h2>The surprise</h2>
-  <p>People who speak a language other than English at home use AI more: <b>58.8%</b>, against <b>41.4%</b> for English only. When you work in your second language, a tool that checks an email or explains a form saves real time and real stress. I came here from Bangalore, so this one felt personal.</p>
+  <div class="game" id="g2">
+    <div class="q">Which group uses AI more?</div>
+    <div class="opts">
+      <button data-ok="0">Australians who speak only English at home</button>
+      <button data-ok="1">Australians who speak another language at home</button>
+    </div>
+    <div class="reveal" id="g2out" aria-live="polite">
+      <div class="verdict" id="g2verdict"></div>
+      <div class="rbar"><div class="lab"><span>Another language at home</span><span>58.8%</span></div><div class="trk"><div class="fill" data-w="58.8" style="background:var(--green)"></div></div></div>
+      <div class="rbar"><div class="lab"><span>English only</span><span>41.4%</span></div><div class="trk"><div class="fill" data-w="41.4" style="background:var(--orange)"></div></div></div>
+      <p style="margin-top:12px">When you work in your second language, a tool that checks an email or explains a form saves real time and real stress. I came here from Bangalore, so this one felt personal.</p>
+    </div>
+  </div>
   <div class="callout">The gap is not about who is "smart enough". It is about who has a reason and a chance to try.</div>
 
   <h2>What is actually stopping people?</h2>
@@ -200,6 +251,8 @@ details td:last-child,details th:last-child{text-align:right}
   </div>
   <p>Good moves. But look who they reach: public servants, uni students, office workers. The groups already in green. The orange side of the chart is mostly not in these programs.</p>
   <p>One more thing. Only <b>13.7%</b> of Australians pay for a premium AI tool, and Australia skipped the last round of the OECD adult skills survey. The last data we have said about <b>44%</b> of adults had low literacy. We are rolling out tools that reward strong reading, without fresh numbers on how many people read well.</p>
+
+<div class="rootip"><svg class="rh" viewBox="60 0 120 150" aria-hidden="true"><path d="M86 70 C76 40 80 14 92 4 C104 16 106 44 102 72 Z" fill="#E07A34"/><path d="M90 64 C84 42 86 24 93 16 C100 26 100 46 98 64 Z" fill="#F2A7A0"/><path d="M120 70 C122 40 134 16 150 10 C156 26 148 52 134 74 Z" fill="#E07A34"/><path d="M124 66 C128 44 136 28 146 20 C148 34 142 52 132 68 Z" fill="#F2A7A0"/><ellipse cx="112" cy="100" rx="44" ry="40" fill="#E07A34"/><ellipse cx="140" cy="114" rx="26" ry="18" fill="#F8E6C8"/><ellipse cx="162" cy="106" rx="7" ry="6" fill="#1B1F1C"/><path d="M138 124 Q148 132 158 124" stroke="#1B1F1C" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="100" cy="96" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/><circle cx="134" cy="92" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/><circle cx="103" cy="98" r="5" fill="#1B1F1C"/><circle cx="137" cy="94" r="5" fill="#1B1F1C"/></svg><div class="bub"><b>Roo:</b> Only about 1 in 5 said skill. So a course alone will not fix this. Showing someone one real task might.</div></div>
 
   <div class="ask">
     <h3>My ask for this week</h3>
@@ -319,6 +372,33 @@ function drawAll(){dumbbell();explorer();barriers()}
 drawAll();
 let rt;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(drawAll,120)});
 if(window.matchMedia)matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",drawAll);
+})();
+
+// guess games
+(function(){
+  const r=document.getElementById("g1r"),v=document.getElementById("g1v"),out=document.getElementById("g1out");
+  r.addEventListener("input",()=>v.textContent=r.value);
+  function fill(scope){scope.querySelectorAll(".fill[data-w]").forEach(f=>{f.style.width="0";requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=f.dataset.w+"%"))})}
+  document.getElementById("g1b").onclick=()=>{
+    const g=+r.value, real=15.5, d=Math.abs(g-real);
+    document.getElementById("g1gv").textContent=g+"%";
+    const gf=document.getElementById("g1gf"); gf.style.width="0"; requestAnimationFrame(()=>requestAnimationFrame(()=>gf.style.width=g+"%"));
+    let msg;
+    if(d<=5) msg="Spot on. You were within 5 points.";
+    else if(g>real) msg="You guessed "+Math.round(d)+" points too high. The real number is about 1 in 6.";
+    else msg="You guessed "+Math.round(d)+" points too low. The real number is about 1 in 6.";
+    document.getElementById("g1verdict").textContent=msg;
+    out.classList.add("on"); fill(out);
+    document.getElementById("g1b").style.display="none";
+  };
+  document.getElementById("g1again").onclick=()=>{out.classList.remove("on");document.getElementById("g1b").style.display="";r.value=50;v.textContent=50};
+  const g2=document.getElementById("g2"), o2=document.getElementById("g2out");
+  g2.querySelectorAll(".opts button").forEach(b=>b.onclick=()=>{
+    g2.querySelectorAll(".opts button").forEach(x=>{x.classList.remove("right","wrong");if(x.dataset.ok==="1")x.classList.add("right")});
+    if(b.dataset.ok!=="1") b.classList.add("wrong");
+    document.getElementById("g2verdict").textContent=b.dataset.ok==="1"?"Right. Did you expect that?":"Easy mistake. It is the other way around.";
+    o2.classList.add("on"); fill(o2);
+  });
 })();
 </script>
 </body>
