@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Divide | Hours Back Ch 3</title>
+<meta name="description" content="Australia leads the world in AI. But not all Australians do. Hours Back, chapter 3, by Hemanth Rangaswamy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FCFBF7; --card:#FFFFFF; --ink:#1B1F1C; --ink2:#4A524D; --muted:#7A827D; --line:#E6E3DA;
+  --green:#0F7045; --orange:#E27A30; --yellow:#F2C230; --yellow-soft:#FDF3D0; --green-soft:#E3F1E9;
+  --grid:#ECE9E1;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1A1A19; --card:#232422; --ink:#F1F0EB; --ink2:#C4C7C2; --muted:#8F958F; --line:#363834;
+    --green:#34A06C; --orange:#D96F28; --yellow:#E9B926; --yellow-soft:#3A3219; --green-soft:#1E3328; --grid:#2E302C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1A1A19; --card:#232422; --ink:#F1F0EB; --ink2:#C4C7C2; --muted:#8F958F; --line:#363834;
+  --green:#34A06C; --orange:#D96F28; --yellow:#E9B926; --yellow-soft:#3A3219; --green-soft:#1E3328; --grid:#2E302C;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+a{color:var(--green)}
+header.hero{background:var(--yellow-soft);border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center;padding-top:44px;padding-bottom:36px}
+.kicker{font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+h1{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:clamp(30px,6vw,46px);line-height:1.1;margin:10px 0 12px}
+h1 .but{color:var(--orange)}
+.lede{color:var(--ink2);font-size:18px;margin:0}
+.byline{margin-top:14px;font-size:14px;color:var(--muted)}
+.roo{width:150px;height:auto;max-height:210px}
+h2{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:28px;line-height:1.2;margin:48px 0 8px}
+p{margin:0 0 14px}
+.recap{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:28px 0 8px}
+.recap div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--ink2)}
+.recap b{display:block;color:var(--ink);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.recap .now{border-color:var(--green);background:var(--green-soft)}
+.big{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+.stat{flex:1 1 200px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.stat .n{font-family:Fraunces,Georgia,serif;font-weight:800;font-size:44px;line-height:1}
+.stat .l{font-size:14px;color:var(--ink2);margin-top:6px}
+.stat.g .n{color:var(--green)} .stat.o .n{color:var(--orange)}
+.stat.o .l::before,.stat.g .l::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:0}
+.stat.g .l::before{background:var(--green)} .stat.o .l::before{background:var(--orange)}
+figure{margin:18px 0 28px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px}
+figcaption .t{font-weight:800;font-size:17px}
+figcaption .s{font-size:14px;color:var(--ink2)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--ink2);margin:10px 0 4px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 6px}
+.tabs button{font:600 14px Inter,sans-serif;border:1px solid var(--line);background:var(--bg);color:var(--ink2);padding:7px 14px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:Inter,sans-serif}
+.note{font-size:13px;color:var(--muted);margin-top:6px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;line-height:1.4;padding:8px 10px;border-radius:8px;opacity:0;transition:opacity .12s;max-width:240px;z-index:9}
+.tip b{font-size:15px}
+.callout{background:var(--yellow-soft);border-left:4px solid var(--yellow);border-radius:8px;padding:14px 16px;margin:18px 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.cards div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;font-size:14px;color:var(--ink2)}
+.cards b{display:block;color:var(--ink);margin-bottom:4px}
+.ask{background:var(--green);color:#fff;border-radius:14px;padding:22px;margin:28px 0}
+.ask h3{font-family:Fraunces,Georgia,serif;margin:0 0 6px;font-size:24px}
+.ask p{margin:0;color:#fff}
+.src{font-size:13px;color:var(--muted);border-top:1px solid var(--line);margin-top:40px;padding:18px 0 48px}
+.src ul{padding-left:18px;margin:6px 0}
+table.sr{position:absolute;left:-9999px}
+details{margin-top:6px;font-size:13px;color:var(--ink2)}
+details table{border-collapse:collapse;margin-top:6px;width:100%}
+details td,details th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left}
+details td:last-child,details th:last-child{text-align:right}
+@media (max-width:620px){
+  .hero .wrap{grid-template-columns:1fr 90px}
+  .roo{width:90px}
+  .recap,.cards{grid-template-columns:1fr}
+  h2{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <a href="index.html" style="font-size:14px;text-decoration:none">&larr; Back to portfolio</a>
+      <div class="kicker" style="margin-top:10px">Hours Back · Chapter 3</div>
+      <h1>Australia leads the world in AI. <span class="but">But not all Australians do.</span></h1>
+      <p class="lede">I looked inside the national number. The lead is real. It is just not shared.</p>
+      <div class="byline">By Hemanth Rangaswamy · Data Analyst, Melbourne</div>
+    </div>
+    <svg class="roo" viewBox="0 0 220 300" role="img" aria-label="Roo, the data kangaroo, with a small bar chart in its pouch">  <!-- shadow -->
+  <ellipse cx="110" cy="288" rx="70" ry="8" fill="#000" opacity=".18"/>
+  <!-- tail -->
+  <path d="M70 230 C40 228 20 214 8 196 C5 191 12 188 15 192 C28 206 46 214 74 212 Z" fill="#E07A34"/>
+  <!-- feet -->
+  <ellipse cx="88" cy="276" rx="34" ry="12" fill="#C8612A"/>
+  <ellipse cx="140" cy="276" rx="34" ry="12" fill="#C8612A"/>
+  <!-- body -->
+  <ellipse cx="112" cy="206" rx="54" ry="70" fill="#E07A34"/>
+  <!-- belly -->
+  <ellipse cx="116" cy="216" rx="34" ry="50" fill="#F8E6C8"/>
+  <!-- pouch with chart -->
+  <path d="M86 226 Q116 250 146 226 L146 236 Q116 262 86 236 Z" fill="#E9C99A"/>
+  <rect x="100" y="214" width="8" height="14" rx="2" fill="#0F7045"/>
+  <rect x="112" y="206" width="8" height="22" rx="2" fill="#F2C230"/>
+  <rect x="124" y="220" width="8" height="8" rx="2" fill="#E0582A"/>
+  <!-- arm waving -->
+  <path d="M146 170 C160 164 172 152 178 138 C181 131 190 134 188 142 C182 160 168 176 150 184 Z" fill="#E07A34"/>
+  <circle cx="184" cy="136" r="8" fill="#E07A34"/>
+  <!-- other arm -->
+  <path d="M88 176 C80 186 78 196 84 204 C88 208 94 204 92 198 C90 192 94 186 98 182 Z" fill="#D06A2C"/>
+  <!-- ears -->
+  <path d="M86 70 C76 40 80 14 92 4 C104 16 106 44 102 72 Z" fill="#E07A34"/>
+  <path d="M90 64 C84 42 86 24 93 16 C100 26 100 46 98 64 Z" fill="#F2A7A0"/>
+  <path d="M120 70 C122 40 134 16 150 10 C156 26 148 52 134 74 Z" fill="#E07A34"/>
+  <path d="M124 66 C128 44 136 28 146 20 C148 34 142 52 132 68 Z" fill="#F2A7A0"/>
+  <!-- head -->
+  <ellipse cx="112" cy="100" rx="44" ry="40" fill="#E07A34"/>
+  <!-- snout -->
+  <ellipse cx="140" cy="114" rx="26" ry="18" fill="#F8E6C8"/>
+  <ellipse cx="162" cy="106" rx="7" ry="6" fill="#1B1F1C"/>
+  <path d="M138 124 Q148 132 158 124" stroke="#1B1F1C" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- cheek -->
+  <circle cx="110" cy="124" r="8" fill="#F2A7A0" opacity=".8"/>
+  <!-- glasses -->
+  <circle cx="100" cy="96" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/>
+  <circle cx="134" cy="92" r="15" fill="#FFF8EC" stroke="#1B1F1C" stroke-width="5"/>
+  <path d="M115 94 L119 93" stroke="#1B1F1C" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="103" cy="98" r="5" fill="#1B1F1C"/>
+  <circle cx="137" cy="94" r="5" fill="#1B1F1C"/>
+  <circle cx="105" cy="96" r="1.6" fill="#fff"/>
+  <circle cx="139" cy="92" r="1.6" fill="#fff"/>
+</svg>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="recap" aria-label="The story so far">
+    <div><b>Chapter 1</b>One week of busywork. 18 hours by hand. Under 2 with Claude and MCP.</div>
+    <div><b>Chapter 2</b>Why Australia uses Claude more than almost anyone. Not money. The kind of work we do.</div>
+    <div class="now"><b>Chapter 3 · now</b>When a report says "Australia uses AI", who is Australia?</div>
+  </div>
+
+  <h2>The gap in one line</h2>
+  <p>Same country. Often the same family. Very different weeks.</p>
+  <div class="big">
+    <div class="stat g"><div class="n">69.1%</div><div class="l">of Australians aged 18 to 34 use generative AI</div></div>
+    <div class="stat o"><div class="n">15.5%</div><div class="l">of Australians aged 65 to 74 do</div></div>
+  </div>
+
+  <h2>Four gaps</h2>
+  <p>Each line is one gap. The green dot is the group furthest ahead. The orange dot is the group furthest behind. Hover or tap a dot for the number.</p>
+  <figure>
+    <figcaption><div class="t">Share of Australians who use generative AI</div><div class="s">Highest vs lowest group, by age, education, work and language</div></figcaption>
+    <div class="legend"><span style="--c:var(--green)">Group furthest ahead</span><span style="--c:var(--orange)">Group furthest behind</span></div>
+    <div class="chart" id="dumbbell"></div>
+    <details><summary>See the numbers as a table</summary><table id="t-dumb"></table></details>
+  </figure>
+
+  <h2>Pick a gap and look closer</h2>
+  <p>Bars in green mean most people in that group already use AI. Orange means most do not yet.</p>
+  <figure>
+    <figcaption><div class="t" id="exp-title">Use of generative AI</div><div class="s" id="exp-sub"></div></figcaption>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="legend"><span style="--c:var(--green)">Half or more use it</span><span style="--c:var(--orange)">Less than half use it</span></div>
+    <div class="chart" id="explorer"></div>
+    <p class="note" id="exp-note"></p>
+  </figure>
+
+  <h2>The desk is the doorway</h2>
+  <p>This links straight back to chapter 2. ABS data shows <b>59%</b> of managers and professionals usually work from home at least some of the time. For other jobs it is <b>21%</b>. If your job happens on a laptop, AI is one tab away. If it happens on a site, in a truck or on a farm, it is not part of your day.</p>
+  <p>Small business shows the same pattern. About <b>43%</b> of small and medium businesses use AI. In health, education and services it is above half. In construction and agriculture it is below 30%.</p>
+
+  <h2>The surprise</h2>
+  <p>People who speak a language other than English at home use AI more: <b>58.8%</b>, against <b>41.4%</b> for English only. When you work in your second language, a tool that checks an email or explains a form saves real time and real stress. I came here from Bangalore, so this one felt personal.</p>
+  <div class="callout">The gap is not about who is "smart enough". It is about who has a reason and a chance to try.</div>
+
+  <h2>What is actually stopping people?</h2>
+  <p>I assumed skill. The small business data says otherwise.</p>
+  <figure>
+    <figcaption><div class="t">Why small businesses are not using AI</div><div class="s">Share of non-adopting SMEs giving each reason</div></figcaption>
+    <div class="chart" id="barriers"></div>
+    <p class="note">Only about 1 in 5 said skill. A course will not fix a trust problem. One real task from someone's own day might.</p>
+  </figure>
+
+  <h2>Who the help reaches</h2>
+  <div class="cards">
+    <div><b>Public service</b>Every public servant gets AI training and access under the APS AI Plan.</div>
+    <div><b>Universities</b>About 80% of uni students used AI in 2025. ANU and Anthropic signed a A$500k partnership.</div>
+    <div><b>Business</b>The National AI Centre now tracks small business uptake sector by sector.</div>
+  </div>
+  <p>Good moves. But look who they reach: public servants, uni students, office workers. The groups already in green. The orange side of the chart is mostly not in these programs.</p>
+  <p>One more thing. Only <b>13.7%</b> of Australians pay for a premium AI tool, and Australia skipped the last round of the OECD adult skills survey. The last data we have said about <b>44%</b> of adults had low literacy. We are rolling out tools that reward strong reading, without fresh numbers on how many people read well.</p>
+
+  <div class="ask">
+    <h3>My ask for this week</h3>
+    <p>Show one person outside your bubble one task. A parent, a tradie mate, a neighbour with a small shop. Not "here is AI". Just "here is how I would write that quote, or read that letter". That is how trust gets built. One hour back at a time.</p>
+  </div>
+
+  <p>Roo out.</p>
+
+  <div class="src">
+    <b>Sources</b>
+    <ul>
+      <li>Australian Digital Inclusion Index, "The AI divide" case study</li>
+      <li>ABS, Working arrangements, August 2025</li>
+      <li>National AI Centre, SME AI adoption insights, Dec 2025 to Feb 2026</li>
+      <li>Department of Finance, APS AI Plan</li>
+      <li>ACS Information Age, 80% of Australian uni students used AI (2025)</li>
+      <li>ANU, "ANU partners with Anthropic", 2 April 2026</li>
+      <li>OECD PIAAC and ABS notes on Australia's cycle 2 participation</li>
+    </ul>
+    All numbers as published. They show links, not proof of cause.
+  </div>
+</main>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+const NS="http://www.w3.org/2000/svg";
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+function txt(parent,x,y,s,attrs){const t=el("text",Object.assign({x,y},attrs||{}),parent);t.textContent=s;return t}
+const tip=document.getElementById("tip");
+function showTip(ev,html){tip.innerHTML=html;tip.style.opacity=1;const x=Math.min(ev.clientX+14,window.innerWidth-250);tip.style.left=x+"px";tip.style.top=(ev.clientY+14)+"px"}
+function hideTip(){tip.style.opacity=0}
+function hover(node,html){node.addEventListener("pointermove",e=>showTip(e,html));node.addEventListener("pointerleave",hideTip);node.addEventListener("pointerdown",e=>showTip(e,html))}
+
+const GAPS=[
+ {k:"Age",hi:["Aged 18 to 34",69.1],lo:["Aged 65 to 74",15.5]},
+ {k:"Education",hi:["Bachelor degree",62],lo:["Year 10 or below",4.2]},
+ {k:"Work",hi:["Professionals",67.9],lo:["Machinery operators",26.7]},
+ {k:"Language at home",hi:["Other than English",58.8],lo:["English only",41.4]}
+];
+const EXPLORE={
+ "Age":{sub:"By age group",rows:[["18 to 34",69.1],["65 to 74",15.5]],note:"More than four times the gap between the youngest and oldest adults measured."},
+ "Education":{sub:"By highest level of schooling",rows:[["Students",78.9],["Bachelor degree",62],["Year 12",37.2],["Year 10 or below",4.2]],note:"From about 6 in 10 with a degree to about 1 in 25 who left school at Year 10."},
+ "Work":{sub:"By type of job",rows:[["Professionals",67.9],["Managers",52.2],["Labourers",31.8],["Machinery operators",26.7]],note:"Desk jobs lead. Site, trade and driving jobs trail."},
+ "Language":{sub:"By language spoken at home",rows:[["Other than English",58.8],["English only",41.4]],note:"The surprise: bilingual Australians are ahead."},
+ "First Nations":{sub:"First Nations Australians compared with young adults",rows:[["Aged 18 to 34",69.1],["First Nations",36.6]],note:"First Nations use is close to half the young adult rate."}
+};
+
+function dumbbell(){
+  const box=document.getElementById("dumbbell");box.innerHTML="";
+  const W=Math.max(320,box.clientWidth), narrow=W<520;
+  const L=narrow?12:150, R=24, rowH=narrow?64:54, top=26;
+  const H=top+GAPS.length*rowH+8;
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":"Dumbbell chart of four gaps in generative AI use"},box);
+  const x=v=>L+(W-L-R)*v/100;
+  [0,25,50,75,100].forEach(v=>{el("line",{x1:x(v),x2:x(v),y1:top-6,y2:H-6,stroke:css("--grid"),"stroke-width":1},svg);txt(svg,x(v),top-12,v+"%",{"text-anchor":"middle","font-size":11,fill:css("--muted")})});
+  GAPS.forEach((g,i)=>{
+    const y=top+i*rowH+(narrow?38:rowH/2);
+    if(narrow) txt(svg,L,y-20,g.k,{"font-size":13,"font-weight":600,fill:css("--ink")});
+    else txt(svg,L-14,y+4,g.k,{"text-anchor":"end","font-size":13,"font-weight":600,fill:css("--ink")});
+    el("line",{x1:x(g.lo[1]),x2:x(g.hi[1]),y1:y,y2:y,stroke:css("--muted"),"stroke-width":2,"stroke-linecap":"round"},svg);
+    const gap=(g.hi[1]/g.lo[1]);
+    const mid=(x(g.lo[1])+x(g.hi[1]))/2;
+    txt(svg,mid,y-9,gap>=2?gap.toFixed(1)+"x":"+"+(g.hi[1]-g.lo[1]).toFixed(1)+" pts",{"text-anchor":"middle","font-size":11,"font-weight":600,fill:css("--ink2")});
+    [[g.lo,"--orange"],[g.hi,"--green"]].forEach(([d,c])=>{
+      const cx=x(d[1]);
+      el("circle",{cx,cy:y,r:7.5,fill:css(c),stroke:css("--card"),"stroke-width":2},svg);
+      txt(svg,cx,y+22,d[1]+"%",{"text-anchor":"middle","font-size":11.5,"font-weight":600,fill:css("--ink2")});
+      const hit=el("circle",{cx,cy:y,r:16,fill:"transparent",style:"cursor:pointer"},svg);
+      hover(hit,`<b>${d[1]}%</b><br>${d[0]}`);
+    });
+  });
+  const t=document.getElementById("t-dumb");
+  t.innerHTML="<tr><th>Gap</th><th>Group</th><th>Use</th></tr>"+GAPS.map(g=>`<tr><td>${g.k}</td><td>${g.hi[0]}</td><td>${g.hi[1]}%</td></tr><tr><td></td><td>${g.lo[0]}</td><td>${g.lo[1]}%</td></tr>`).join("");
+}
+
+function bars(boxId,rows,colorFn,labelW){
+  const box=document.getElementById(boxId);box.innerHTML="";
+  const W=Math.max(300,box.clientWidth), narrow=W<520;
+  const L=narrow?12:(labelW||160), R=54, barH=22, gapY=narrow?40:14, top=8;
+  const rowH=barH+gapY;
+  const H=top+rows.length*rowH;
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,role:"img","aria-label":rows.map(r=>r[0]+" "+r[1]+"%").join(", ")},box);
+  const x=v=>(W-L-R)*v/100;
+  rows.forEach((r,i)=>{
+    const y=top+i*rowH+(narrow?18:0);
+    if(narrow) txt(svg,L,y-6,r[0],{"font-size":13,fill:css("--ink")});
+    else txt(svg,L-12,y+barH/2+4,r[0],{"text-anchor":"end","font-size":13,fill:css("--ink")});
+    el("rect",{x:L,y,width:W-L-R,height:barH,rx:4,fill:css("--grid")},svg);
+    const w=Math.max(4,x(r[1]));
+    const b=el("rect",{x:L,y,width:w,height:barH,rx:4,fill:css(colorFn(r[1]))},svg);
+    txt(svg,L+w+8,y+barH/2+4,r[1]+"%",{"font-size":13,"font-weight":700,fill:css("--ink")});
+    const hit=el("rect",{x:L,y:y-4,width:W-L-R,height:barH+8,fill:"transparent",style:"cursor:pointer"},svg);
+    hover(hit,`<b>${r[1]}%</b><br>${r[0]}`);
+  });
+}
+
+let current="Education";
+function explorer(){
+  const d=EXPLORE[current];
+  document.getElementById("exp-sub").textContent=d.sub;
+  document.getElementById("exp-note").textContent=d.note;
+  bars("explorer",d.rows,v=>v>=50?"--green":"--orange");
+}
+const tabs=document.getElementById("tabs");
+Object.keys(EXPLORE).forEach(k=>{
+  const b=document.createElement("button");b.textContent=k;b.setAttribute("role","tab");b.setAttribute("aria-selected",k===current);
+  b.onclick=()=>{current=k;[...tabs.children].forEach(c=>c.setAttribute("aria-selected",c===b));explorer()};
+  tabs.appendChild(b);
+});
+
+function barriers(){bars("barriers",[["Do not trust it",65],["Not relevant to our work",54],["Do not know how",19]],()=> "--orange",190)}
+
+function drawAll(){dumbbell();explorer();barriers()}
+drawAll();
+let rt;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(drawAll,120)});
+if(window.matchMedia)matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",drawAll);
+})();
+</script>
+</body>
+</html>
