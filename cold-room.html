@@ -11,7 +11,43 @@
 <meta property="og:url" content="https://hemanth-gowda23.github.io/Portfolio_Gowda23/cold-room.html">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
-<style>html{-webkit-text-size-adjust:100%}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}[hidden]{display:none!important}img{max-width:100%}/* MASCOT: Roo */
+.roo svg{display:block;width:100%;height:auto;overflow:visible}
+.roo .body-g{transform-origin:60px 130px;transform-box:view-box;animation:breathe 3.2s ease-in-out infinite}
+.roo .tail{transform-origin:44px 104px;transform-box:view-box;animation:sway 2.6s ease-in-out infinite}
+.roo .earL{transform-origin:58px 34px;transform-box:view-box;animation:twitch 5s ease-in-out infinite}
+.roo .earR{transform-origin:70px 32px;transform-box:view-box;animation:twitch 5s ease-in-out .4s infinite}
+.roo .eyes{transform-origin:70px 46px;transform-box:view-box;animation:blink 4.5s infinite}
+.roo .arm{transform-origin:70px 80px;transform-box:view-box;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.roo .arm2{transform-origin:56px 80px;transform-box:view-box;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.roo .pb{transform-box:fill-box;transform-origin:bottom;animation:grow 2.4s ease-in-out infinite}
+.roo .pb:nth-child(2){animation-delay:.3s}.roo .pb:nth-child(3){animation-delay:.6s}
+.roo .happy,.roo .sad{display:none}
+.roo.cheer .eyes,.roo.facepalm .eyes{display:none}
+.roo.cheer .happy{display:inline}.roo.facepalm .sad{display:inline}
+.roo.point .arm{transform:rotate(-18deg)}
+.roo.wave .arm{animation:wave .5s ease-in-out 4}
+.roo.cheer .arm{transform:rotate(-95deg)}.roo.cheer .arm2{transform:rotate(80deg)}
+.roo.cheer svg{animation:jump .55s ease 3}
+.roo.facepalm .arm{transform:rotate(-128deg) translate(4px,-4px)}
+.roo.facepalm .body-g{animation:none;transform:rotate(-4deg)}
+.roo.think .arm{transform:rotate(-110deg)}
+.roo.hop svg{animation:hop .6s ease}
+@keyframes breathe{50%{transform:scale(1.02,.985)}}
+@keyframes sway{50%{transform:rotate(9deg)}}
+@keyframes twitch{0%,86%,100%{transform:rotate(0)}90%{transform:rotate(-14deg)}94%{transform:rotate(6deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes grow{50%{transform:scaleY(.55)}}
+@keyframes wave{50%{transform:rotate(-70deg)}}
+@keyframes jump{40%{transform:translateY(-26px) rotate(-4deg)}70%{transform:translateY(0) scale(1.05,.94)}}
+@keyframes hop{0%{transform:translateY(0)}30%{transform:translateY(-30px) scale(.96,1.05)}60%{transform:translateY(0) scale(1.08,.92)}100%{transform:none}}
+.roo{display:block}
+.roo-hero{width:30px;flex:none}
+#rooFig{width:64px;flex:none;align-self:end}
+.tour-card .roo{width:46px;flex:none}
+.roo-panel{grid-template-columns:64px minmax(0,1fr)!important;align-items:end!important}
+@media (prefers-reduced-motion:reduce){.roo *,.roo svg{animation:none!important;transition:none!important}}
+</style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -68,14 +104,14 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 @media (max-width:840px){.floor{grid-template-columns:1fr}.clock{margin-left:0}}
 .racks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @media (max-width:520px){.racks{grid-template-columns:1fr}}
-.rack{display:grid;gap:8px}
+.rack{display:grid;gap:8px;min-width:0}
 .rack .hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
 .rack .nm{font-weight:600;font-size:14px}
 .chip{font:600 11px var(--sans);padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}
 .chip.ok{color:var(--ok)} .chip.warn{color:var(--warn)} .chip.bad{color:var(--bad)}
 .chip.dot::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:5px;vertical-align:1px}
-.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;padding:6px;background:var(--soft);border-radius:4px}
-.cell{aspect-ratio:1.35;border-radius:2px;border:1px dashed var(--line)}
+.grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:3px;padding:6px;background:var(--soft);border-radius:4px}
+.cell{aspect-ratio:1.35;min-width:0;border-radius:2px;border:1px dashed var(--line)}
 .cell.on{background:var(--carton);border:1px solid var(--carton-edge)}
 .cell.rp{box-shadow:inset 0 -3px 0 var(--bad)}
 .rack .meta{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
@@ -86,10 +122,10 @@ input[type=range]{width:100%;accent-color:var(--accent)}
 .stat .k{font-size:12.5px;color:var(--muted)}
 .stat .v{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
 .stat .v.bad{color:var(--bad)} .stat .v.ok{color:var(--ok)}
-.roo{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--accent-soft)}
+.roo-box{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--accent-soft)}
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 13px var(--sans);flex:none}
-.roo p{margin:0;font-size:14px}
-.roo .who{font-size:12px;color:var(--muted);font-weight:600}
+.roo-box p{margin:0;font-size:14px}
+.roo-box .who{font-size:12px;color:var(--muted);font-weight:600}
 .log{border:1px solid var(--line);border-radius:8px;background:var(--panel);max-height:220px;overflow:auto;font:12.5px/1.5 var(--mono)}
 .log div{padding:6px 12px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:34px minmax(0,1fr);gap:6px}
 .log .d{color:var(--muted)} .log .bad{color:var(--bad)} .log .good{color:var(--ok)} .log .hot{color:var(--warn)}
@@ -167,7 +203,7 @@ footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padd
       <h1>The Cold Room <small>2&deg;C</small></h1>
       <p class="lede">A fresh food warehouse lives on two quiet jobs: never run out of packaging, and never pay for pallets you don't need. Play three weeks, throw a heatwave and a late truck at it, and see what breaks.</p>
     </div>
-    <button class="btn roo-btn primary" id="tourBtn" type="button"><span class="avatar" style="width:24px;height:24px;font-size:9px;background:#fff;color:#1f5f99">Roo</span>Show me around</button>
+    <button class="btn roo-btn primary" id="tourBtn" type="button"><span class="roo roo-hero wave" id="rooHero"></span>Show me around</button>
   </div>
 
   <div class="tabs" role="tablist">
@@ -220,7 +256,7 @@ footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padd
           <div class="stat"><div class="k">Hired pallets on site</div><div class="v" id="sPal">-</div></div>
           <div class="stat"><div class="k">Pallet hire so far</div><div class="v" id="sCost">-</div></div>
         </div>
-        <div class="roo" id="t-roo" aria-live="polite"><div class="avatar">Roo</div><div><div class="who">Roo, the data kangaroo</div><p id="rooSays"></p></div></div>
+        <div class="roo-box roo-panel" id="t-roo" aria-live="polite"><div class="roo wave" id="rooFig"></div><div><div class="who">Roo, the data kangaroo</div><p id="rooSays"></p></div></div>
         <div class="log" id="log" aria-label="What happened each day"></div>
       </div>
     </div>
@@ -275,6 +311,30 @@ footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padd
 <script>
 (function(){
 "use strict";
+
+function rooSVG(){return '<svg viewBox="0 0 120 140" aria-hidden="true">'+
+   '<ellipse cx="62" cy="134" rx="34" ry="4" fill="#000" opacity=".15"/>'+
+   '<g class="body-g">'+
+   '<path class="tail" d="M44 104 Q12 112 2 88 Q8 84 12 92 Q22 106 48 96 Z" fill="#c9652c"/>'+
+   '<g class="arm2"><path d="M56 80 Q46 90 44 98" stroke="#c9652c" stroke-width="7" stroke-linecap="round" fill="none"/></g>'+
+   '<ellipse cx="60" cy="96" rx="28" ry="32" fill="#e07a3a"/>'+
+   '<ellipse cx="64" cy="100" rx="17" ry="22" fill="#f7e3c4"/>'+
+   '<g><rect class="pb" x="56" y="98" width="4.5" height="11" rx="1.5" fill="#008a72"/><rect class="pb" x="62" y="94" width="4.5" height="15" rx="1.5" fill="#f5b82e"/><rect class="pb" x="68" y="101" width="4.5" height="8" rx="1.5" fill="#e2572b"/></g>'+
+   '<path d="M49 106 Q64 124 79 106 Z" fill="#ecc998"/>'+
+   '<ellipse cx="50" cy="127" rx="17" ry="6" fill="#c9652c"/><ellipse cx="76" cy="128" rx="17" ry="6" fill="#c9652c"/>'+
+   '<path class="earL" d="M54 38 Q42 6 56 8 Q63 20 63 36 Z" fill="#e07a3a"/><path d="M55 32 Q49 14 56 13 Q60 22 60 32 Z" fill="#f4a9a0"/>'+
+   '<path class="earR" d="M66 34 Q68 2 82 8 Q78 22 73 36 Z" fill="#e07a3a"/><path d="M69 30 Q71 12 78 12 Q75 22 72 31 Z" fill="#f4a9a0"/>'+
+   '<ellipse cx="68" cy="50" rx="21" ry="19" fill="#e07a3a"/>'+
+   '<ellipse cx="83" cy="57" rx="13" ry="9.5" fill="#f7e3c4"/>'+
+   '<ellipse cx="94" cy="53" rx="4" ry="3" fill="#10261f"/>'+
+   '<path d="M84 63 Q88 66 93 61" stroke="#10261f" stroke-width="2" fill="none" stroke-linecap="round"/>'+
+   '<circle cx="75" cy="60" r="3.5" fill="#f4a9a0" opacity=".8"/>'+
+   '<g class="eyes"><circle cx="64" cy="47" r="2.6" fill="#10261f"/><circle cx="80" cy="46" r="2.6" fill="#10261f"/><circle cx="65" cy="46" r=".9" fill="#fff"/><circle cx="81" cy="45" r=".9" fill="#fff"/></g>'+
+   '<g class="happy"><path d="M60 48 Q64 43 68 48" stroke="#10261f" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M76 47 Q80 42 84 47" stroke="#10261f" stroke-width="2.2" fill="none" stroke-linecap="round"/></g>'+
+   '<g class="sad"><path d="M60 47 L68 48" stroke="#10261f" stroke-width="2.2" stroke-linecap="round"/><path d="M76 46 L84 47" stroke="#10261f" stroke-width="2.2" stroke-linecap="round"/></g>'+
+   '<circle cx="64" cy="47" r="7.5" fill="rgba(255,255,255,.25)" stroke="#10261f" stroke-width="2.4"/><circle cx="80" cy="46" r="7.5" fill="rgba(255,255,255,.25)" stroke="#10261f" stroke-width="2.4"/><path d="M71.5 46.5 L72.5 46.5" stroke="#10261f" stroke-width="2.4"/>'+
+   '<g class="arm"><path d="M70 80 Q84 86 94 80" stroke="#c9652c" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="95" cy="79" r="5" fill="#c9652c"/></g>'+
+   '</g></svg>';}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const fmt=n=>Math.round(n).toLocaleString('en-AU'), money=n=>'$'+Math.round(n).toLocaleString('en-AU');
 const DAYS=21, RATE=0.15, BASE=1000, SAFETY=2, CELLS=40;
@@ -348,6 +408,7 @@ function render(){
   $('#sPal').textContent=d?fmt(d.pal):'-';$('#sCost').textContent=d?money(d.cost):'-';
   $('#log').innerHTML=run.slice(0,cur).flatMap(x=>x.ev.map(e=>`<div><span class="d">D${x.day}</span><span class="${e[0]}">${e[1]}</span></div>`)).reverse().join('')||'<div><span class="d"></span><span>Events appear here as the days play.</span></div>';
   $('#rooSays').textContent=roo(d);
+  const fig=$('#rooFig');if(fig){let m='point';if(!d)m='wave';else if(d.ev.find(e=>e[0]==='bad'))m='facepalm';else if(d.day===DAYS&&!d.late)m='cheer';else if(d.day===8&&d.hot)m='think';else if(d.day===DAYS)m='think';fig.className='roo '+m;}
   chart();
 }
 function roo(d){
@@ -417,7 +478,7 @@ function tourOpen(){tourClose();ti=0;hole=document.createElement('div');hole.cla
 function tourClose(){if(hole)hole.remove();if(card)card.remove();hole=card=null;ti=-1;}
 function tourShow(){
   const s=TOUR[ti];showTab(s.tab);
-  card.innerHTML=`<div class="who"><span class="avatar">Roo</span><b>${s.t}</b></div><p>${s.x}</p><div class="nav"><span class="count">${ti+1} / ${TOUR.length}</span><span class="row"><button class="btn" type="button" id="tSkip">${ti===TOUR.length-1?'Close':'Skip'}</button>${ti>0?'<button class="btn" type="button" id="tBack">Back</button>':''}${ti<TOUR.length-1?'<button class="btn primary" type="button" id="tNext">Next</button>':''}</span></div>`;
+  card.innerHTML=`<div class="who"><span class="roo ${ti===0?'wave':ti===TOUR.length-1?'cheer':'point'}">${rooSVG()}</span><b>${s.t}</b></div><p>${s.x}</p><div class="nav"><span class="count">${ti+1} / ${TOUR.length}</span><span class="row"><button class="btn" type="button" id="tSkip">${ti===TOUR.length-1?'Close':'Skip'}</button>${ti>0?'<button class="btn" type="button" id="tBack">Back</button>':''}${ti<TOUR.length-1?'<button class="btn primary" type="button" id="tNext">Next</button>':''}</span></div>`;
   $('#tSkip').onclick=tourClose;
   if($('#tBack'))$('#tBack').onclick=()=>{ti--;tourShow();};
   if($('#tNext'))$('#tNext').onclick=()=>{ti++;tourShow();};
@@ -510,7 +571,7 @@ function check(){
 $('#check').onclick=check;$('#sample').onclick=()=>{$('#ours').value=OURS;$('#theirs').value=THEIRS;check();};
 $('#ours').value=OURS;$('#theirs').value=THEIRS;check();
 
-buildRacks();labels();run=simulate(cfg);cur=9;render();compare();
+document.getElementById('rooHero').innerHTML=rooSVG();document.getElementById('rooFig').innerHTML=rooSVG();buildRacks();labels();run=simulate(cfg);cur=9;render();compare();
 try{const t=localStorage.getItem('coldroom-tab');if(t&&document.getElementById(t))showTab(t);}catch(e){}
 })();
 </script>
