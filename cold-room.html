@@ -368,7 +368,7 @@ function chart(){
   let g='';
   if(cfg.heat>0)g+=`<rect x="${x(8)}" y="${T}" width="${x(14)-x(8)}" height="${H-T-B}" fill="var(--warn)" opacity=".08"/><text x="${(x(8)+x(14))/2}" y="${T+14}" text-anchor="middle" font-size="11" fill="var(--warn)" font-family="Public Sans, sans-serif">heatwave</text>`;
   [0,4,8,12].forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="JetBrains Mono, monospace">${v}${v===12?'+':''}</text>`;});
-  [1,7,14,21].forEach(v=>{g+=`<text x="${x(v)}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="JetBrains Mono, monospace">Day ${v}</text>`;});
+  [1,7,14,21].forEach(v=>{g+=`<text x="${x(v)}" y="${H-8}" text-anchor="${v===1?'start':v===21?'end':'middle'}" font-size="11" fill="var(--muted)" font-family="JetBrains Mono, monospace">Day ${v}</text>`;});
   g+=`<line x1="${L}" x2="${W-R}" y1="${y(1)}" y2="${y(1)}" stroke="var(--bad)" stroke-dasharray="4 4"/>`;
   const sh=run.slice(0,cur);
   if(!sh.length)g+=`<text x="${W/2}" y="${H/2}" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Public Sans, sans-serif">Press Play to draw the three weeks</text>`;
