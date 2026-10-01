@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Cold Room | Hemanth Rangaswamy</title>
+<meta name="description" content="Play a fresh food warehouse for three weeks. Throw a heatwave and a late truck at it, fix a messy pallet statement, and see the tools the industry uses. An interactive demo by Hemanth Rangaswamy.">
+<meta property="og:title" content="The Cold Room: can your warehouse survive a heatwave?">
+<meta property="og:description" content="An interactive fresh food supply chain demo. Play 3 weeks, fix a pallet statement, see the tools the industry uses.">
+<meta property="og:image" content="https://hemanth-gowda23.github.io/Portfolio_Gowda23/cold-room-og.png">
+<meta property="og:url" content="https://hemanth-gowda23.github.io/Portfolio_Gowda23/cold-room.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a calm operations console. One accent (cold-room blue), status colours only for status. Racks drawn as carton grids. Roo runs a spotlight tour on top. */
+:root{
+  --bg:#f6f6f4; --panel:#ffffff; --ink:#1d2329; --muted:#5f6871; --line:#e2e4e1; --soft:#f0f1ee;
+  --accent:#1f5f99; --accent-soft:#e7eef5; --carton:#c9a77c; --carton-edge:#b08e64;
+  --ok:#2e7d4f; --warn:#b7791f; --bad:#b83a2e; --shade:rgba(20,26,32,.55);
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14181c; --panel:#1b2026; --ink:#e6e9ec; --muted:#9aa3ab; --line:#2b3238; --soft:#20262c;
+  --accent:#6aa6dc; --accent-soft:#1f2c39; --carton:#b8946a; --carton-edge:#93734f;
+  --ok:#5bb883; --warn:#e0a643; --bad:#e46b5d; --shade:rgba(0,0,0,.65); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14181c; --panel:#1b2026; --ink:#e6e9ec; --muted:#9aa3ab; --line:#2b3238; --soft:#20262c;
+  --accent:#6aa6dc; --accent-soft:#1f2c39; --carton:#b8946a; --carton-edge:#93734f;
+  --ok:#5bb883; --warn:#e0a643; --bad:#e46b5d; --shade:rgba(0,0,0,.65); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:28px 56px;display:grid;gap:24px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.top > div{min-width:0;display:grid;gap:6px}
+.kicker{font-size:13px;color:var(--muted)}
+h1{font-size:clamp(28px,4.4vw,40px);line-height:1.1;margin:0;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+h1 small{font-family:var(--mono);font-size:.45em;font-weight:500;color:var(--accent);vertical-align:middle;margin-left:8px}
+.lede{margin:0;max-width:64ch;color:var(--muted)}
+h2{font-size:20px;margin:0;font-weight:700;text-wrap:balance}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:10px 14px;font:600 14px var(--sans);color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn{font:600 14px var(--sans);padding:9px 14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;border-radius:6px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.roo-btn{display:inline-flex;gap:8px;align-items:center}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.ctl{display:grid;gap:6px;min-width:0;align-content:start}
+.ctl .lab{font-weight:600;font-size:14px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ctl .val{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.ctl small{color:var(--muted);font-size:12.5px;line-height:1.45}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{flex:1;padding:8px 6px;border:0;background:var(--panel);color:var(--ink);font:500 13px var(--sans);cursor:pointer}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.q{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1px solid var(--muted);color:var(--muted);font:600 11px var(--sans);cursor:pointer;background:none;padding:0}
+.runbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.clock{margin-left:auto;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.clock b{color:var(--ink);font-size:15px}
+.floor{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px}
+@media (max-width:840px){.floor{grid-template-columns:1fr}.clock{margin-left:0}}
+.racks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:520px){.racks{grid-template-columns:1fr}}
+.rack{display:grid;gap:8px}
+.rack .hd{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.rack .nm{font-weight:600;font-size:14px}
+.chip{font:600 11px var(--sans);padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}
+.chip.ok{color:var(--ok)} .chip.warn{color:var(--warn)} .chip.bad{color:var(--bad)}
+.chip.dot::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:5px;vertical-align:1px}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;padding:6px;background:var(--soft);border-radius:4px}
+.cell{aspect-ratio:1.35;border-radius:2px;border:1px dashed var(--line)}
+.cell.on{background:var(--carton);border:1px solid var(--carton-edge)}
+.cell.rp{box-shadow:inset 0 -3px 0 var(--bad)}
+.rack .meta{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.truck{font-family:var(--mono);font-size:12px;color:var(--accent);min-height:18px}
+.side{display:grid;gap:14px;align-content:start}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--panel)}
+.stat .k{font-size:12.5px;color:var(--muted)}
+.stat .v{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.stat .v.bad{color:var(--bad)} .stat .v.ok{color:var(--ok)}
+.roo{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:8px;padding:12px;background:var(--accent-soft)}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 13px var(--sans);flex:none}
+.roo p{margin:0;font-size:14px}
+.roo .who{font-size:12px;color:var(--muted);font-weight:600}
+.log{border:1px solid var(--line);border-radius:8px;background:var(--panel);max-height:220px;overflow:auto;font:12.5px/1.5 var(--mono)}
+.log div{padding:6px 12px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:34px minmax(0,1fr);gap:6px}
+.log .d{color:var(--muted)} .log .bad{color:var(--bad)} .log .good{color:var(--ok)} .log .hot{color:var(--warn)}
+.chart svg{width:100%;height:auto;display:block}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.best{color:var(--ok);font-weight:600;font-size:12.5px;margin-left:6px}
+.note{font-size:13px;color:var(--muted);margin:0;max-width:75ch}
+.inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.inputs{grid-template-columns:1fr}}
+label.f{font-weight:600;font-size:14px}
+textarea{width:100%;min-height:210px;font:12.5px/1.5 var(--mono);padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);resize:vertical}
+.issues{display:grid;gap:8px}
+.issue{border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:6px;background:var(--panel);padding:10px 14px;display:grid;gap:4px}
+.issue.warn{border-left-color:var(--warn)} .issue.okk{border-left-color:var(--ok)}
+.issue .h{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.issue .h b{font-family:var(--mono);font-size:13px}
+.email pre{white-space:pre-wrap;margin:0;font:12.5px/1.55 var(--mono);background:var(--soft);padding:12px;border-radius:6px;max-height:280px;overflow:auto}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+@media (max-width:900px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.stage{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:12px;display:grid;gap:4px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.stage[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.stage .no{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.stage .t{font-weight:600}
+.stage .s{font-size:12.5px;color:var(--muted)}
+.detail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:760px){.detail{grid-template-columns:1fr}}
+.tools{display:grid;gap:8px}
+.tool{border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:grid;gap:2px}
+.tool .tt{font-weight:600}
+.tool .tx{font-size:13.5px;color:var(--muted)}
+.tag{font:600 11px var(--sans);color:var(--accent);background:var(--accent-soft);padding:2px 7px;border-radius:999px;justify-self:start}
+.ladder{display:grid;gap:8px}
+.step{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.step .lv{font-weight:600}
+.step .lv span{display:block;font-size:12px;color:var(--muted);font-weight:400}
+footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.pop{position:fixed;z-index:60;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13.5px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.pop b{display:block;margin-bottom:2px}
+.tour-hole{position:fixed;z-index:50;border-radius:10px;box-shadow:0 0 0 9999px var(--shade);pointer-events:none;transition:all .25s ease}
+.tour-card{position:fixed;z-index:51;width:min(360px,calc(100vw - 32px));background:var(--panel);color:var(--ink);border-radius:10px;padding:14px 16px;box-shadow:0 12px 32px rgba(0,0,0,.25);display:grid;gap:10px}
+.tour-card .who{display:flex;gap:10px;align-items:center}
+.tour-card p{margin:0;font-size:14px}
+.tour-card .nav{display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.tour-card .count{font-family:var(--mono);font-size:12px;color:var(--muted)}
+@media (max-width:600px){
+  .tour-card{left:12px!important;right:12px;width:auto;top:auto!important;bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+  .wrap{padding-block:18px 40px;gap:18px}
+  .panel{padding:12px}
+  .runbar .btn{flex:1 1 auto}
+  .clock{width:100%;margin-left:0}
+  .stat .v{font-size:20px}
+  .step{grid-template-columns:1fr;gap:4px}
+  .top .btn{width:100%;justify-content:center}
+  .tab{padding:10px 10px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){.tour-hole{transition:none}}
+.backlink{font-size:13px;color:var(--accent);text-decoration:none;font-weight:600}
+.backlink:hover{text-decoration:underline}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <div class="kicker"><a class="backlink" href="index.html">&larr; Hemanth Rangaswamy, portfolio</a> &middot; Fresh food supply chain, explained by doing</div>
+      <h1>The Cold Room <small>2&deg;C</small></h1>
+      <p class="lede">A fresh food warehouse lives on two quiet jobs: never run out of packaging, and never pay for pallets you don't need. Play three weeks, throw a heatwave and a late truck at it, and see what breaks.</p>
+    </div>
+    <button class="btn roo-btn primary" id="tourBtn" type="button"><span class="avatar" style="width:24px;height:24px;font-size:9px;background:#fff;color:#1f5f99">Roo</span>Show me around</button>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-sim" aria-selected="true">1. Run the cold room</button>
+    <button class="tab" role="tab" id="tab-fix" aria-selected="false">2. Fix the pallet statement</button>
+    <button class="tab" role="tab" id="tab-ind" aria-selected="false">3. Tools the industry uses</button>
+  </div>
+
+  <section id="pane-sim" style="display:grid;gap:16px">
+    <div class="panel controls" id="t-controls">
+      <div class="ctl">
+        <div class="lab"><label for="heat">Heatwave in week 2</label><span class="val" id="heatV"></span></div>
+        <input id="heat" type="range" min="0" max="60" step="5" value="30">
+        <small>More orders on hot days, and every box needs extra ice packs.</small>
+      </div>
+      <div class="ctl">
+        <div class="lab"><label for="late">Supplier trucks late by</label><span class="val" id="lateV"></span></div>
+        <input id="late" type="range" min="0" max="4" step="1" value="2">
+        <small>Applies to every order placed from day 5.</small>
+      </div>
+      <div class="ctl" id="t-method">
+        <div class="lab">How we reorder <button class="q" type="button" data-g="kanban" aria-label="What is kanban?">?</button></div>
+        <div class="seg" id="mode"><button type="button" data-v="kanban" aria-pressed="true">Kanban</button><button type="button" data-v="weekly" aria-pressed="false">Every Monday</button></div>
+        <small>Kanban reorders when stock drops to a set line. Monday orders the same amount each week.</small>
+      </div>
+      <div class="ctl" id="t-pallets">
+        <div class="lab">Spare pallets <button class="q" type="button" data-g="dehire" aria-label="What is pallet hire?">?</button></div>
+        <div class="seg" id="dehire"><button type="button" data-v="1" aria-pressed="true">Return Fridays</button><button type="button" data-v="0" aria-pressed="false">Keep them</button></div>
+        <small>Hired pallets cost a little every day you hold them.</small>
+      </div>
+    </div>
+
+    <div class="runbar" id="t-run">
+      <button class="btn primary" id="play" type="button">Play 3 weeks</button>
+      <button class="btn" id="step" type="button">Next day</button>
+      <button class="btn" id="end" type="button">Skip to end</button>
+      <button class="btn" id="reset" type="button">Reset</button>
+      <span class="clock">Day <b id="dayN">0</b> of 21 &middot; <span id="dayName">before the first shift</span></span>
+    </div>
+
+    <div class="floor">
+      <div class="panel" id="t-racks" style="display:grid;gap:12px">
+        <div class="row" style="justify-content:space-between"><h2>Packing store</h2><span class="note">1 carton = 1/40 of a full rack. Red edge = reorder line <button class="q" type="button" data-g="rp" aria-label="What is a reorder line?">?</button></span></div>
+        <div class="racks" id="racks"></div>
+      </div>
+      <div class="side">
+        <div class="stats" id="t-stats">
+          <div class="stat"><div class="k">Boxes out on time</div><div class="v" id="sOn">-</div></div>
+          <div class="stat"><div class="k">Boxes late</div><div class="v" id="sLate">-</div></div>
+          <div class="stat"><div class="k">Hired pallets on site</div><div class="v" id="sPal">-</div></div>
+          <div class="stat"><div class="k">Pallet hire so far</div><div class="v" id="sCost">-</div></div>
+        </div>
+        <div class="roo" id="t-roo" aria-live="polite"><div class="avatar">Roo</div><div><div class="who">Roo, the data kangaroo</div><p id="rooSays"></p></div></div>
+        <div class="log" id="log" aria-label="What happened each day"></div>
+      </div>
+    </div>
+
+    <div class="panel chart" id="t-chart" style="display:grid;gap:10px">
+      <div class="row" style="justify-content:space-between"><h2>Days of stock left</h2><span class="note">How long each item lasts at today's pace <button class="q" type="button" data-g="cover" aria-label="What is days of cover?">?</button></span></div>
+      <svg id="chart" viewBox="0 0 720 230" role="img" aria-label="Days of stock left for each item across 21 days"></svg>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <div class="panel" id="t-compare" style="display:grid;gap:10px">
+      <h2>Same three weeks, both ways</h2>
+      <p class="note">Your heatwave and late trucks, run once with each ordering method. Moves with the sliders.</p>
+      <div class="tablewrap"><table id="cmp"></table></div>
+      <p class="note">Made-up example data. Pallet hire uses an example rate of $0.15 per pallet per day; real rates depend on the contract.</p>
+    </div>
+  </section>
+
+  <section id="pane-fix" hidden style="display:grid;gap:16px">
+    <div style="display:grid;gap:6px">
+      <h2>Pallet statement fixer</h2>
+      <p class="lede">Each month the pallet hire company sends a statement of pallets in and out. When it doesn't match your gate records, you pay hire on pallets you never had. Paste both lists and get the gaps, the cost and the emails to send.</p>
+    </div>
+    <div class="inputs" id="t-paste">
+      <div class="ctl"><label class="f" for="ours">Our gate log</label><textarea id="ours" spellcheck="false"></textarea><small>Columns: date, docket, partner, IN or OUT, pallets</small></div>
+      <div class="ctl"><label class="f" for="theirs">Hire company statement</label><textarea id="theirs" spellcheck="false"></textarea><small>Any spacing or capitals. Dockets are cleaned before matching.</small></div>
+    </div>
+    <div class="row"><button class="btn primary" id="check" type="button">Check the statement</button><button class="btn" id="sample" type="button">Load messy sample</button><span class="note" id="fixMsg"></span></div>
+    <div class="stats" id="fixStats" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))"></div>
+    <div class="issues" id="issues"></div>
+    <div id="emails" style="display:grid;gap:12px"></div>
+    <p class="note">This demo uses plain matching rules in your browser, so nothing you paste leaves the page. In a real team I would add an AI step to read statements that arrive as PDFs or photos.</p>
+  </section>
+
+  <section id="pane-ind" hidden style="display:grid;gap:16px">
+    <div style="display:grid;gap:6px">
+      <h2>How fresh food businesses run the chain</h2>
+      <p class="lede">The demo covers two small jobs. Here is the whole chain from supplier to front door, and the tools teams use at each step. Tap a step.</p>
+    </div>
+    <div class="flow" id="flow"></div>
+    <div class="detail panel" id="detail"></div>
+    <div class="panel" style="display:grid;gap:12px">
+      <h2>Why start with a sheet and simple rules?</h2>
+      <p class="note">Most teams grow into tools in steps. The step that fits the size of the business usually beats a big system bought too early.</p>
+      <div class="ladder" id="ladder"></div>
+    </div>
+  </section>
+
+  <footer>Built by Hemanth Rangaswamy, Melbourne. Every number on this page is made up for the demo and does not belong to any company.</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>Math.round(n).toLocaleString('en-AU'), money=n=>'$'+Math.round(n).toLocaleString('en-AU');
+const DAYS=21, RATE=0.15, BASE=1000, SAFETY=2, CELLS=40;
+const DOW=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const ITEMS=[
+ {key:'box',name:'Compostable boxes',per:1,heat:1,start:9000,lead:4,perPal:600,max:15000,col:'#5f7f9b'},
+ {key:'liner',name:'Wool liners',per:1,heat:1,start:8500,lead:6,perPal:400,max:15000,col:'#a0794f'},
+ {key:'ice',name:'Gel ice packs',per:2,heat:1.6,start:16000,lead:3,perPal:1500,max:28000,col:'#2f7fc1'},
+ {key:'label',name:'Batch labels',per:1,heat:1,start:12000,lead:5,perPal:5000,max:20000,col:'#7a8a3a'}];
+const GLOSS={
+ kanban:['Kanban','A simple reorder signal. Each item has a line on the shelf. When stock drops to that line, you order more. The line = daily use x (supplier lead time + 2 safety days).'],
+ dehire:['Pallet hire','Most food businesses rent pallets from a pool company (CHEP and Loscam are the big ones in Australia). You pay a small fee per pallet per day. Sending spares back, called de-hiring, stops the fee.'],
+ rp:['Reorder line','The stock level where you must order now, so the new delivery lands before you run out. Busy weeks push the line up.'],
+ cover:['Days of cover','Stock on the shelf divided by how much you use per day. Under 2 days is tight. Under 1 day means boxes stop going out tomorrow.']};
+
+function demand(day,heat){const dow=(day-1)%7;let d=BASE*(dow===5?0.6:dow===6?0.4:1.1);const hot=day>=8&&day<=14&&heat>0;if(hot)d*=1+heat/100;return{orders:Math.round(d),hot};}
+function simulate(c){
+  const stock={},used={};let pipe=[],pal=120,cost=0,on=0,late=0;const out=[];
+  ITEMS.forEach(it=>{stock[it.key]=it.start;used[it.key]=[];});
+  for(let day=1;day<=DAYS;day++){
+    const ev=[],dow=(day-1)%7;
+    pipe=pipe.filter(o=>{if(o.arrive===day){stock[o.key]+=o.qty;const p=Math.ceil(o.qty/o.perPal);pal+=p;ev.push(['good',`${o.name}: ${fmt(o.qty)} delivered on ${p} pallets`]);return false;}return true;});
+    const {orders,hot}=demand(day,c.heat);
+    if(day===8&&hot)ev.push(['hot',`Heatwave. Orders up ${c.heat}%, ice packs per box up 60%`]);
+    let can=orders;ITEMS.forEach(it=>{can=Math.min(can,Math.floor(stock[it.key]/(it.per*(hot?it.heat:1))));});
+    const shipped=Math.max(0,can),lt=orders-shipped;
+    const empty=[];ITEMS.forEach(it=>{const need=it.per*(hot?it.heat:1);stock[it.key]-=shipped*need;used[it.key].push(orders*need);if(lt>0&&stock[it.key]<need)empty.push(it.name.toLowerCase());});
+    if(lt>0)ev.push(['bad',`${fmt(lt)} boxes late. Out of ${empty.join(' and ')}`]);
+    on+=shipped;late+=lt;pal=Math.max(0,pal-Math.round(shipped/260));
+    const delay=day>=5?c.late:0;
+    ITEMS.forEach(it=>{
+      const onOrder=pipe.filter(o=>o.key===it.key).reduce((a,o)=>a+o.qty,0);
+      const u=used[it.key].slice(-3),avg=u.reduce((a,b)=>a+b,0)/u.length;
+      if(c.mode==='kanban'){if(stock[it.key]+onOrder<=avg*(it.lead+SAFETY)){const qty=Math.max(0,Math.round((it.max-stock[it.key]-onOrder)/100)*100);if(qty>0){pipe.push({key:it.key,name:it.name,qty,perPal:it.perPal,arrive:day+it.lead+delay});ev.push(['',`Hit the line: ordered ${fmt(qty)} ${it.name.toLowerCase()}, due day ${day+it.lead+delay}`]);}}}
+      else if(dow===0){const qty=Math.round(BASE*it.per*6.2*1.05/100)*100;pipe.push({key:it.key,name:it.name,qty,perPal:it.perPal,arrive:day+it.lead+delay});ev.push(['',`Monday order: ${fmt(qty)} ${it.name.toLowerCase()}, due day ${day+it.lead+delay}`]);}
+    });
+    if(c.dehire&&dow===4&&pal>60){ev.push(['good',`Sent ${pal-60} spare pallets back to the pool`]);pal=60;}
+    cost+=pal*RATE;
+    const cover={},rp={},inb={},due={};
+    ITEMS.forEach(it=>{const u=used[it.key].slice(-3),avg=u.reduce((a,b)=>a+b,0)/u.length;cover[it.key]=avg?stock[it.key]/avg:0;rp[it.key]=avg*(it.lead+SAFETY);const ps=pipe.filter(o=>o.key===it.key);inb[it.key]=ps.reduce((a,o)=>a+o.qty,0);due[it.key]=ps.length?Math.min(...ps.map(o=>o.arrive)):null;});
+    out.push({day,dow,orders,hot,stock:{...stock},cover,rp,inb,due,pal,cost,on,late,ev});
+  }
+  return out;
+}
+
+const cfg={heat:30,late:2,mode:'kanban',dehire:true};
+let run=[],cur=0,timer=null;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function buildRacks(){
+  $('#racks').innerHTML=ITEMS.map(it=>`<div class="rack"><div class="hd"><span class="nm">${it.name}</span><span class="chip dot ok" id="c-${it.key}">OK</span></div><div class="grid" id="g-${it.key}">${'<span class="cell"></span>'.repeat(CELLS)}</div><div class="meta"><span id="m1-${it.key}"></span><span id="m2-${it.key}"></span></div><div class="truck" id="tr-${it.key}"></div></div>`).join('');
+  $('#legend').innerHTML=ITEMS.map(it=>`<span><i style="background:${it.col}"></i>${it.name}</span>`).join('')+`<span><i style="background:var(--bad)"></i>Under 1 day</span>`;
+}
+function render(){
+  const d=cur?run[cur-1]:null;
+  $('#dayN').textContent=cur;
+  $('#dayName').textContent=d?DOW[d.dow]+(d.hot?', heatwave':''):'before the first shift';
+  ITEMS.forEach(it=>{
+    const s=d?d.stock[it.key]:it.start, rp=d?d.rp[it.key]:it.start*.45;
+    const n=Math.round(Math.max(0,Math.min(1,s/it.max))*CELLS), r=Math.min(CELLS-1,Math.max(0,Math.round(rp/it.max*CELLS)-1));
+    $$('#g-'+it.key+' .cell').forEach((c,i)=>{c.className='cell'+(i<n?' on':'')+(i===r?' rp':'');});
+    $('#m1-'+it.key).textContent=`${fmt(s)} in stock`;
+    $('#m2-'+it.key).textContent=d?`${d.cover[it.key].toFixed(1)} days left`:'';
+    $('#tr-'+it.key).textContent=d&&d.inb[it.key]?`Truck due day ${d.due[it.key]}: +${fmt(d.inb[it.key])}`:'';
+    const ch=$('#c-'+it.key);let cl='ok',tx='OK';
+    if(d&&d.cover[it.key]<1){cl='bad';tx='Running out';}else if(d&&s<=rp){cl='warn';tx='At the line';}
+    ch.className='chip dot '+cl;ch.textContent=tx;
+  });
+  $('#sOn').textContent=d?fmt(d.on):'-';
+  const sl=$('#sLate');sl.textContent=d?fmt(d.late):'-';sl.className='v'+(d?(d.late?' bad':' ok'):'');
+  $('#sPal').textContent=d?fmt(d.pal):'-';$('#sCost').textContent=d?money(d.cost):'-';
+  $('#log').innerHTML=run.slice(0,cur).flatMap(x=>x.ev.map(e=>`<div><span class="d">D${x.day}</span><span class="${e[0]}">${e[1]}</span></div>`)).reverse().join('')||'<div><span class="d"></span><span>Events appear here as the days play.</span></div>';
+  $('#rooSays').textContent=roo(d);
+  chart();
+}
+function roo(d){
+  if(!d) return 'Hi, I\'m Roo. Press "Show me around" for a 1 minute tour, or just press Play.';
+  const bad=d.ev.find(e=>e[0]==='bad');
+  if(bad) return cfg.mode==='weekly'?`${bad[1].split('.')[0]}. A Monday order can't react to a heatwave. Switch to Kanban and play again.`:`${bad[1].split('.')[0]}. Kanban reacted, but the truck was ${cfg.late} days late. Look at the blue line in the chart.`;
+  if(d.day===8&&d.hot) return 'Heatwave. Watch the ice pack rack: it empties much faster now.';
+  if(d.dow===4&&cfg.dehire) return 'Friday. Spare pallets go back, so the hire bill stops growing.';
+  if(!cfg.dehire&&d.pal>150) return `${fmt(d.pal)} hired pallets sitting here. Each one costs money every day.`;
+  if(d.day===DAYS) return d.late?`Done. ${fmt(d.late)} boxes went out late. Compare both methods in the table below.`:'Three weeks and nothing late. That is a calm cold room.';
+  const low=ITEMS.find(it=>d.stock[it.key]<=d.rp[it.key]);
+  if(low) return `${low.name} are at the reorder line. ${cfg.mode==='kanban'?'An order is on its way.':'But nothing gets ordered until Monday.'}`;
+  return 'All racks above their reorder lines. Quiet shift.';
+}
+function chart(){
+  const W=720,H=230,L=34,R=12,T=12,B=28,maxY=12;
+  const x=v=>L+(v-1)/(DAYS-1)*(W-L-R),y=v=>T+(1-Math.min(v,maxY)/maxY)*(H-T-B);
+  let g='';
+  if(cfg.heat>0)g+=`<rect x="${x(8)}" y="${T}" width="${x(14)-x(8)}" height="${H-T-B}" fill="var(--warn)" opacity=".08"/><text x="${(x(8)+x(14))/2}" y="${T+14}" text-anchor="middle" font-size="11" fill="var(--warn)" font-family="Public Sans, sans-serif">heatwave</text>`;
+  [0,4,8,12].forEach(v=>{g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)" font-family="JetBrains Mono, monospace">${v}${v===12?'+':''}</text>`;});
+  [1,7,14,21].forEach(v=>{g+=`<text x="${x(v)}" y="${H-8}" text-anchor="middle" font-size="11" fill="var(--muted)" font-family="JetBrains Mono, monospace">Day ${v}</text>`;});
+  g+=`<line x1="${L}" x2="${W-R}" y1="${y(1)}" y2="${y(1)}" stroke="var(--bad)" stroke-dasharray="4 4"/>`;
+  const sh=run.slice(0,cur);
+  if(!sh.length)g+=`<text x="${W/2}" y="${H/2}" text-anchor="middle" font-size="13" fill="var(--muted)" font-family="Public Sans, sans-serif">Press Play to draw the three weeks</text>`;
+  ITEMS.forEach(it=>{if(!sh.length)return;g+=`<polyline points="${sh.map(d=>x(d.day).toFixed(1)+','+y(d.cover[it.key]).toFixed(1)).join(' ')}" fill="none" stroke="${it.col}" stroke-width="2.2" stroke-linejoin="round"/>`;const l=sh[sh.length-1];g+=`<circle cx="${x(l.day)}" cy="${y(l.cover[it.key])}" r="3.5" fill="${it.col}"/>`;});
+  $('#chart').innerHTML=g;
+}
+function compare(){
+  const r=['kanban','weekly'].map(m=>{const s=simulate({...cfg,mode:m}),l=s[s.length-1];return{m,on:l.on,late:l.late,cost:l.cost,peak:Math.max(...s.map(d=>d.pal))};});
+  const best=r[0].late===r[1].late?null:(r[0].late<r[1].late?'kanban':'weekly');
+  $('#cmp').innerHTML=`<thead><tr><th>Method</th><th class="n">On time</th><th class="n">Late</th><th class="n">Most pallets held</th><th class="n">Pallet hire</th></tr></thead><tbody>`+r.map(o=>`<tr><td>${o.m==='kanban'?'Kanban':'Every Monday'}${best===o.m?'<span class="best">fewer late</span>':''}</td><td class="n">${fmt(o.on)}</td><td class="n">${fmt(o.late)}</td><td class="n">${fmt(o.peak)}</td><td class="n">${money(o.cost)}</td></tr>`).join('')+'</tbody>';
+}
+function recalc(){const c=cur;run=simulate(cfg);cur=c;render();compare();}
+function stop(){if(timer){clearInterval(timer);timer=null;$('#play').textContent='Play 3 weeks';}}
+function step(){if(cur<DAYS){cur++;render();}if(cur>=DAYS)stop();}
+$('#play').onclick=()=>{if(timer){stop();return;}if(cur>=DAYS)cur=0;if(reduce){cur=DAYS;render();return;}$('#play').textContent='Pause';timer=setInterval(step,600);};
+$('#step').onclick=()=>{stop();step();};
+$('#end').onclick=()=>{stop();cur=DAYS;render();};
+$('#reset').onclick=()=>{stop();cur=0;render();};
+const heat=$('#heat'),late=$('#late');
+const labels=()=>{$('#heatV').textContent='+'+heat.value+'% orders';$('#lateV').textContent=late.value+(late.value==='1'?' day':' days');};
+heat.oninput=()=>{cfg.heat=+heat.value;labels();recalc();};late.oninput=()=>{cfg.late=+late.value;labels();recalc();};
+[['mode','mode',v=>v],['dehire','dehire',v=>v==='1']].forEach(([id,k,p])=>$$('#'+id+' button').forEach(b=>b.onclick=()=>{$$('#'+id+' button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));cfg[k]=p(b.dataset.v);recalc();}));
+
+function showTab(id){$$('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.id===id)));$('#pane-sim').hidden=id!=='tab-sim';$('#pane-fix').hidden=id!=='tab-fix';$('#pane-ind').hidden=id!=='tab-ind';try{localStorage.setItem('coldroom-tab',id);}catch(e){}}
+$$('.tab').forEach(t=>t.onclick=()=>showTab(t.id));
+
+let pop=null;
+function closePop(){if(pop){pop.remove();pop=null;}}
+document.addEventListener('click',e=>{const q=e.target.closest('.q');if(!q){if(!e.target.closest('.pop'))closePop();return;}closePop();const g=GLOSS[q.dataset.g];pop=document.createElement('div');pop.className='pop';pop.innerHTML=`<b>${g[0]}</b>${g[1]}`;document.body.appendChild(pop);const r=q.getBoundingClientRect(),w=Math.min(300,innerWidth-32);pop.style.width=w+'px';pop.style.left=Math.max(16,Math.min(innerWidth-w-16,r.left-w/2))+'px';const ph=pop.offsetHeight;pop.style.top=(r.bottom+8+ph>innerHeight?r.top-ph-8:r.bottom+8)+'px';});
+addEventListener('scroll',closePop,{passive:true});
+
+const TOUR=[
+ {tab:'tab-sim',el:null,t:'Welcome to the cold room',x:'This is a fresh food warehouse. Every day it packs about 1,000 chilled meal boxes. Each box needs a carton, a wool liner, ice packs and a label. Run out of any one, and boxes stop.'},
+ {tab:'tab-sim',el:'#t-racks',t:'The packing store',x:'Each rack is one packing item. Brown cartons show how full it is. The red edge is the reorder line: when stock reaches it, it is time to order. Trucks on the way show under each rack.'},
+ {tab:'tab-sim',el:'#t-controls',t:'Make life hard',x:'Turn up the heatwave and make the supplier truck late. This is what real summers look like in fresh food.'},
+ {tab:'tab-sim',el:'#t-method',t:'Two ways to reorder',x:'Kanban checks the reorder line every day. "Every Monday" orders the same amount once a week, which is easy but blind to surprises. Tap the ? for more.'},
+ {tab:'tab-sim',el:'#t-pallets',t:'Pallets cost money',x:'Pallets are rented, and the fee runs every day. Sending spares back on Fridays keeps the bill small.'},
+ {tab:'tab-sim',el:'#t-run',t:'Press play',x:'Play runs 21 days. Use "Next day" to go slowly and watch each delivery and each order.'},
+ {tab:'tab-sim',el:'#t-roo',t:'I keep talking',x:'As days pass I explain what just happened and where to look. The log below keeps every event.'},
+ {tab:'tab-sim',el:'#t-chart',t:'The early warning',x:'Days of stock left. When a line drops under the red dashed line, that item runs out tomorrow. This one number tells a supply team most of what they need.'},
+ {tab:'tab-sim',el:'#t-compare',t:'The answer',x:'Same conditions, both methods. Try it with and without a heatwave. Weekly ordering is fine in a calm week. It breaks when demand jumps.'},
+ {tab:'tab-fix',el:'#t-paste',t:'The month-end chore',x:'Every month the pallet hire company sends a statement. Paste it next to your own gate log and the page finds every mismatch, what it costs, and writes the emails.'},
+ {tab:'tab-ind',el:'#flow',t:'The bigger picture',x:'Here is the whole chain from supplier to front door, and the real tools teams use at each step. Tap any step. Thanks for the tour!'}];
+let ti=-1,hole=null,card=null;
+function tourOpen(){tourClose();ti=0;hole=document.createElement('div');hole.className='tour-hole';card=document.createElement('div');card.className='tour-card';card.setAttribute('role','dialog');card.setAttribute('aria-label','Guided tour');document.body.append(hole,card);tourShow();}
+function tourClose(){if(hole)hole.remove();if(card)card.remove();hole=card=null;ti=-1;}
+function tourShow(){
+  const s=TOUR[ti];showTab(s.tab);
+  card.innerHTML=`<div class="who"><span class="avatar">Roo</span><b>${s.t}</b></div><p>${s.x}</p><div class="nav"><span class="count">${ti+1} / ${TOUR.length}</span><span class="row"><button class="btn" type="button" id="tSkip">${ti===TOUR.length-1?'Close':'Skip'}</button>${ti>0?'<button class="btn" type="button" id="tBack">Back</button>':''}${ti<TOUR.length-1?'<button class="btn primary" type="button" id="tNext">Next</button>':''}</span></div>`;
+  $('#tSkip').onclick=tourClose;
+  if($('#tBack'))$('#tBack').onclick=()=>{ti--;tourShow();};
+  if($('#tNext'))$('#tNext').onclick=()=>{ti++;tourShow();};
+  const el=s.el&&$(s.el);
+  if(el){el.scrollIntoView({block:innerWidth<=600?'start':'center',behavior:reduce?'auto':'smooth'});setTimeout(place,reduce?0:380);}else place();
+  ($('#tNext')||$('#tSkip')).focus({preventScroll:true});
+}
+function place(){
+  if(ti<0||!card)return;const s=TOUR[ti],el=s.el&&$(s.el);
+  if(!el){hole.style.cssText='left:50%;top:40%;width:0;height:0';if(innerWidth<=600)return;card.style.left=Math.max(16,(innerWidth-card.offsetWidth)/2)+'px';card.style.top=Math.max(16,innerHeight*0.3)+'px';return;}
+  const r=el.getBoundingClientRect(),p=8;
+  hole.style.cssText=`left:${r.left-p}px;top:${r.top-p}px;width:${r.width+p*2}px;height:${r.height+p*2}px`;
+  if(innerWidth<=600){card.style.left='';card.style.top='';return;}
+  const cw=card.offsetWidth,ch=card.offsetHeight;
+  let top=r.bottom+p+12;if(top+ch>innerHeight-12)top=r.top-p-12-ch;if(top<12)top=Math.max(12,innerHeight-ch-12);
+  card.style.top=top+'px';card.style.left=Math.max(16,Math.min(innerWidth-cw-16,r.left))+'px';
+}
+addEventListener('resize',place);addEventListener('scroll',()=>{if(ti>=0)place();},{passive:true});
+document.addEventListener('keydown',e=>{if(ti<0)return;if(e.key==='Escape')tourClose();else if(e.key==='ArrowRight'&&ti<TOUR.length-1){ti++;tourShow();}else if(e.key==='ArrowLeft'&&ti>0){ti--;tourShow();}});
+$('#tourBtn').onclick=tourOpen;
+
+const STAGES=[
+ {t:'Buy',s:'Ingredients and packaging',why:'Get the right ingredients and packaging in, at the right price, before you need them.',tools:[['ERP purchasing','Systems like NetSuite, SAP Business One or Microsoft Dynamics hold suppliers, prices and purchase orders.','Core'],['Reorder rules (min/max, kanban)','The logic in this demo. Often lives inside the ERP or a shared sheet.','This demo'],['Supplier portals and EDI','Orders and invoices sent system to system, with no retyping.','Growth']]},
+ {t:'Receive',s:'Trucks at the dock',why:'Check that what arrived matches what was ordered, and log the pallets.',tools:[['Barcode or RFID scanning','Scan cartons and pallets at the dock to stop typing errors.','Core'],['Pallet pool portal','CHEP or Loscam portals to log pallet transfers in and out.','This demo'],['Temperature check on arrival','A probe or logger reading. Chilled food above the safe limit is rejected.','Food safety']]},
+ {t:'Store',s:'Cool rooms and racks',why:'Keep food cold and know where every batch sits.',tools:[['WMS (warehouse system)','Knows every location and batch, and tells staff where to put and pick.','Core'],['Temperature sensors','Wireless sensors alert the team when a room warms up.','Food safety'],['FEFO rules','First expiry, first out. The oldest use-by date leaves first.','Core']]},
+ {t:'Make',s:'Kitchen and packing',why:'Plan production to match orders and keep every batch traceable.',tools:[['Production planning (MRP)','Turns orders into a cook plan and a packaging need.','Core'],['Traceability and HACCP records','Links each box back to its ingredient batches, for recalls and audits.','Food safety'],['Packaging use tracking','The racks in this demo. Packaging can stop a line as fast as missing food.','This demo']]},
+ {t:'Ship',s:'Dispatch and delivery',why:'Get boxes to customers fast and cold, and get pallets back to the pool.',tools:[['Route planning (TMS)','Plans truck runs and delivery windows.','Growth'],['Cold chain trackers','Log temperature on the road.','Food safety'],['Pallet reconciliation','Match gate logs to the pool statement. Tab 2 of this demo.','This demo']]},
+ {t:'Learn',s:'Reports and forecasts',why:'See problems early and plan next week better.',tools:[['Dashboards (Power BI, Tableau)','Days of cover, late orders, pallet cost and waste, every morning.','Core'],['Demand forecasting','Uses order history, weather and promotions to plan ahead.','Growth'],['AI assistants','Read supplier PDFs, flag odd numbers, draft emails, answer "why did we run out?"','Emerging']]}];
+let si=0;
+function drawFlow(){
+  $('#flow').innerHTML=STAGES.map((s,i)=>`<button class="stage" type="button" aria-pressed="${i===si}" data-i="${i}"><span class="no">Step ${i+1}</span><span class="t">${s.t}</span><span class="s">${s.s}</span></button>`).join('');
+  $$('.stage').forEach(b=>b.onclick=()=>{si=+b.dataset.i;drawFlow();});
+  const s=STAGES[si];
+  $('#detail').innerHTML=`<div style="display:grid;gap:8px;align-content:start"><h2>${s.t}: ${s.s.toLowerCase()}</h2><p class="note" style="font-size:14px">${s.why}</p><p class="note">Tags: <b>Core</b> most teams have it. <b>Growth</b> comes as the business grows. <b>Food safety</b> keeps food safe. <b>This demo</b> is what you just played with.</p></div><div class="tools">${s.tools.map(([a,b,c])=>`<div class="tool"><span class="tag">${c}</span><span class="tt">${a}</span><span class="tx">${b}</span></div>`).join('')}</div>`;
+}
+$('#ladder').innerHTML=[['Sheet + rules','Small team','A shared sheet with reorder lines and a monthly pallet check. Cheap, fast and easy to change. This demo lives here.'],['Dashboards','Growing','The same numbers in Power BI, so everyone sees days of cover and late orders each morning.'],['ERP + WMS','Mid size','Purchasing, stock and locations in one system, with reorder rules running inside it.'],['Forecasting + AI','Large','Forecasts that use weather and promotions, and AI that reads documents and explains problems.']].map(([a,b,c])=>`<div class="step"><div class="lv">${a}<span>${b}</span></div><div class="note" style="font-size:14px">${c}</div></div>`).join('');
+drawFlow();
+
+const OURS=`date,docket,partner,direction,pallets
+02/09,DK-4102,Meat supplier,IN,24
+03/09,DK-4105,Cold store,OUT,18
+05/09,DK-4111,Veg grower,IN,12
+08/09,DK-4116,Meat supplier,IN,16
+09/09,DK-4121,Veg grower,IN,12
+11/09,DK-4127,Carrier,OUT,22
+15/09,DK-4133,Packaging supplier,IN,20
+16/09,DK-4140,Cold store,OUT,26
+18/09,DK-4152,Meat supplier,IN,24
+22/09,DK-4166,Meat supplier,OUT,24
+24/09,DK-4171,Carrier,OUT,30
+29/09,DK-4180,Veg grower,IN,16`;
+const THEIRS=`Date , Docket No, Customer, Movement, Qty
+02/09/2026, dk 4102 , MEAT SUPPLIER, in, 24
+03/09/2026, DK-4105, Cold Store, OUT, 18
+05/09/2026, DK4111, Veg Grower, In, 12
+08/09/2026, DK-4116, Meat Supplier, IN, 10
+09/09/2026, DK-4121, Veg Grower, IN, 22
+11/09/2026, DK-4127, Carrier, OUT, 22
+15/09/2026, DK-4133, Packaging Supplier, IN, 20
+16/09/2026, DK-4140, Cold Store, OUT, 26
+18/09/2026, DK-4152, Meat Supplier, IN, 24
+19/09/2026, DK-9001, Carrier, IN, 18
+24/09/2026, DK-4171, Carrier, OUT, 30
+29/09/2026, DK-4180, Veg Grower, IN, 16`;
+const nd=s=>(s||'').toUpperCase().replace(/[^A-Z0-9]/g,''),tc=s=>(s||'').trim().toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function parse(t){return t.split(/\r?\n/).map(l=>l.split(/[,\t;]/).map(x=>x.trim())).filter(c=>c.length>=5&&!isNaN(parseFloat(c[4]))).map(c=>({date:esc(c[0]),dk:nd(c[1]),raw:esc(c[1]),p:esc(tc(c[2])),dir:c[3].toUpperCase().startsWith('O')?'OUT':'IN',q:parseFloat(c[4])}));}
+function check(){
+  const a=parse($('#ours').value),b=parse($('#theirs').value);
+  if(!a.length||!b.length){$('#fixMsg').textContent='Paste both lists. Each line needs 5 columns: date, docket, partner, IN or OUT, pallets.';return;}
+  $('#fixMsg').textContent=`Read ${a.length} lines from our log and ${b.length} from the statement.`;
+  const A=new Map(a.map(r=>[r.dk,r])),B=new Map(b.map(r=>[r.dk,r])),iss=[];
+  A.forEach((r,k)=>{const s=B.get(k);if(!s)iss.push({k:'missing',r,gap:r.dir==='OUT'?r.q:0});else if(s.q!==r.q)iss.push({k:'qty',r,s,gap:Math.max(0,(s.q-r.q)*(r.dir==='IN'?1:-1))});else if(s.dir!==r.dir)iss.push({k:'dir',r,s,gap:s.dir==='IN'?2*r.q:0});});
+  B.forEach((s,k)=>{if(!A.has(k))iss.push({k:'extra',r:s,gap:s.dir==='IN'?s.q:0});});
+  const over=iss.reduce((t,i)=>t+i.gap,0),matched=a.length-iss.filter(i=>i.k!=='extra').length;
+  $('#fixStats').innerHTML=[['Dockets matched',`${matched} of ${a.length}`,''],['Lines to fix',iss.length,iss.length?'bad':'ok'],['Pallets we may be charged for wrongly',fmt(over),over?'bad':'ok'],['Hire on those over 30 days',money(over*RATE*30),over?'bad':'ok']].map(([k,v,c])=>`<div class="stat"><div class="k">${k}</div><div class="v ${c}">${v}</div></div>`).join('');
+  const H={missing:'Not on their statement',qty:'Counts differ',dir:'Direction flipped',extra:'Not in our gate log'};
+  const S={missing:i=>`We logged ${i.r.q} pallets ${i.r.dir==='IN'?'in from':'out to'} ${i.r.p} on ${i.r.date}. The statement has no record. ${i.r.dir==='OUT'?'Until it is lodged, we keep paying hire on pallets that already left.':'Ask the partner to lodge it.'}`,
+   qty:i=>`Same docket, different count: we counted ${i.r.q}, they say ${i.s.q}. ${i.gap?`We are charged for ${i.gap} extra.`:'Their count is lower, so recheck ours too.'}`,
+   dir:i=>`We recorded ${i.r.dir}, they recorded ${i.s.dir}. A flipped direction counts double.`,
+   extra:i=>`They show ${i.r.q} pallets ${i.r.dir==='IN'?'in from':'out to'} ${i.r.p} on ${i.r.date}, but our gate log has no such docket. Check the gate book before accepting it.`};
+  $('#issues').innerHTML=iss.length?iss.map(i=>`<div class="issue ${i.gap?'':'warn'}"><div class="h"><b>${i.r.raw}</b><span class="chip dot ${i.gap?'bad':'warn'}">${H[i.k]}</span><span class="note">${i.r.p}</span></div><div>${S[i.k](i)}</div></div>`).join(''):'<div class="issue okk">Every docket matches. Nothing to dispute this month.</div>';
+  const pool=iss.filter(i=>i.k!=='missing'),part={};iss.filter(i=>i.k==='missing').forEach(i=>(part[i.r.p]=part[i.r.p]||[]).push(i));
+  const mails=[];
+  if(pool.length)mails.push(['Pallet hire company','Statement queries for this month',`Hi,\n\nWe checked this month's statement against our gate records and found ${pool.length} line${pool.length>1?'s':''} that don't match:\n\n${pool.map(i=>`- ${i.r.raw} (${i.r.p}, ${i.r.date}): ${i.k==='extra'?`not in our records, ${i.r.q} pallets ${i.r.dir}`:i.k==='qty'?`we counted ${i.r.q}, statement shows ${i.s.q}`:`shown as ${i.s.dir}, we recorded ${i.r.dir}`}`).join('\n')}\n\nCould you please check these and correct the statement, or send the signed dockets?\n\nThanks,\n[Your name]`]);
+  Object.entries(part).forEach(([p,l])=>mails.push([p,'Pallet transfer not yet lodged',`Hi ${p} team,\n\n${l.length>1?"These transfers don't":"This transfer doesn't"} show on our pallet statement yet:\n\n${l.map(i=>`- ${i.r.raw} on ${i.r.date}: ${i.r.q} pallets ${i.r.dir==='IN'?'you sent us':'you collected from us'}`).join('\n')}\n\nCould you please lodge ${l.length>1?'them':'it'} with the pallet company this week?\n\nThanks,\n[Your name]`]));
+  $('#emails').innerHTML=mails.length?'<h2>Emails ready to send</h2>'+mails.map((m,i)=>`<div class="email panel" style="display:grid;gap:8px"><div class="row"><b>To: ${m[0]}</b><span class="note">${m[1]}</span><button class="btn" type="button" data-cp="${i}" style="margin-left:auto">Copy</button><span class="note" id="cpm-${i}"></span></div><pre id="mail-${i}">Subject: ${m[1]}\n\n${m[2]}</pre></div>`).join(''):'';
+  $$('[data-cp]').forEach(b=>b.onclick=()=>{const i=b.dataset.cp,pre=$('#mail-'+i);navigator.clipboard.writeText(pre.textContent).then(()=>{$('#cpm-'+i).textContent='Copied';}).catch(()=>{const r=document.createRange();r.selectNodeContents(pre);const s=getSelection();s.removeAllRanges();s.addRange(r);$('#cpm-'+i).textContent='Selected, press Ctrl+C';});});
+}
+$('#check').onclick=check;$('#sample').onclick=()=>{$('#ours').value=OURS;$('#theirs').value=THEIRS;check();};
+$('#ours').value=OURS;$('#theirs').value=THEIRS;check();
+
+buildRacks();labels();run=simulate(cfg);cur=9;render();compare();
+try{const t=localStorage.getItem('coldroom-tab');if(t&&document.getElementById(t))showTab(t);}catch(e){}
+})();
+</script>
+
+</body>
+</html>

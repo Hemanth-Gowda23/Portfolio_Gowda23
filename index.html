@@ -597,7 +597,18 @@ h1{letter-spacing:-.04em;line-height:.9}
       <div class="wrow rv">
         <div class="wnum">2026</div>
         <div>
-          <h3>Hours Back ch 3: Not all Australians are in on AI <span class="badge g">New</span></h3>
+          <h3>The Cold Room: a fresh food supply chain you can play <span class="badge g">New</span></h3>
+          <p>Run a fresh food warehouse for three weeks. Throw a heatwave and a late truck at it and see which way of reordering keeps boxes going out. Then fix a messy pallet hire statement and see the tools the industry uses at each step. Roo gives a guided tour.</p>
+          <div class="tags"><span class="tag">Supply chain</span><span class="tag">Simulation</span><span class="tag">Reconciliation</span><span class="tag">JavaScript</span><span class="tag">SVG charts</span></div>
+          <div class="wbtns"><a class="wlink" href="cold-room.html">Play it</a><a class="wlink" href="https://github.com/Hemanth-Gowda23/Portfolio_Gowda23/blob/main/cold-room.html" target="_blank" rel="noopener">View code</a></div>
+        </div>
+        <div class="wviz"><svg data-viz="grid" viewBox="0 0 200 76"></svg></div>
+      </div>
+
+      <div class="wrow rv">
+        <div class="wnum">2026</div>
+        <div>
+          <h3>Hours Back ch 3: Not all Australians are in on AI <span class="badge g">Interactive</span></h3>
           <p>Young people, graduates and desk workers use AI a lot. Older people, trade workers and people who left school early mostly do not. Guess the gap first, then see the real numbers.</p>
           <div class="tags"><span class="tag">Data storytelling</span><span class="tag">Research</span><span class="tag">JavaScript</span><span class="tag">SVG charts</span></div>
           <div class="wbtns"><a class="wlink" href="hours-back-ch3.html">Open the story</a></div>
@@ -1170,7 +1181,7 @@ new IntersectionObserver(function(es){es.forEach(function(e){bud.classList.toggl
 document.getElementById('rooclose').addEventListener('click',function(){off=true;bud.classList.remove('on');try{sessionStorage.setItem('roo-off','1');}catch(e){}});
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!seen[e.target.id]&&lines[e.target.id]){seen[e.target.id]=1;var l=lines[e.target.id];say(l[0],l[1]);}});},{rootMargin:'-40% 0px -40% 0px'});
 Object.keys(lines).forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el);});
-var tips=['New: <a href="hours-back-ch3.html">chapter 3, not all Australians are in on AI</a>. Can you guess the gap?','I keep the data in my pouch.','Kangaroos cannot walk backwards. Neither does good data.','Want the CV? <a href="Hemanth_Rangaswamy_CV.pdf" target="_blank" rel="noopener">Here you go</a>.'],ti=0;
+var tips=['New: <a href="cold-room.html">The Cold Room</a>. Can your warehouse survive a heatwave?','Also new: <a href="hours-back-ch3.html">chapter 3, not all Australians are in on AI</a>.','I keep the data in my pouch.','Kangaroos cannot walk backwards. Neither does good data.','Want the CV? <a href="Hemanth_Rangaswamy_CV.pdf" target="_blank" rel="noopener">Here you go</a>.'],ti=0;
 function tap(){say(tips[ti++%tips.length],'cheer',4500);}
 roo.addEventListener('click',tap);roo.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tap();}});
 bub.classList.add('hide');
