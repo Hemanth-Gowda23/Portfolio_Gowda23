@@ -458,6 +458,7 @@ h1{letter-spacing:-.04em;line-height:.9}
     <div class="nlinks">
       <a href="#route">Story</a>
       <a href="#work">Work</a>
+      <a href="https://www.linkedin.com/newsletters/hours-back-ai-and-mcp-7506178399283957760/" target="_blank" rel="noopener">Newsletter</a>
       <a href="#experience">Experience</a>
       <a href="https://github.com/Hemanth-Gowda23" target="_blank" rel="noopener">Code</a>
       <a href="#contact">Contact</a>
@@ -469,9 +470,9 @@ h1{letter-spacing:-.04em;line-height:.9}
 
 <header id="hero">
   <canvas id="field" aria-hidden="true"></canvas>
-  <div class="stamp" aria-hidden="true"><div>Route<b>BLR &rarr; MEL</b>Data analyst<br>Melbourne</div></div>
+  <div class="stamp" aria-hidden="true"><div>Route<b>BLR to MEL</b>Data analyst<br>Melbourne</div></div>
   <div class="wrap">
-    <div class="eyebrow">Bangalore <b>&rarr;</b> Melbourne <b>/</b> Full working rights <b>/</b> Available now</div>
+    <div class="eyebrow">Bengaluru <b>to</b> Melbourne <b>/</b> Full working rights <b>/</b> Available now</div>
     <h1>
       <span class="ln"><span>Hemanth Rangaswamy</span></span>
     </h1>
@@ -620,15 +621,15 @@ h1{letter-spacing:-.04em;line-height:.9}
         <div class="wnum">2026</div>
         <div>
           <h3>Hours Back ch 2: Why Australia leads the world in AI <span class="badge g">Interactive</span></h3>
-          <p>Australia uses Claude more per person than any other country. I read 10 public reports, checked every number, and built an interactive story on why. Short answer: the kind of jobs we do, not income.</p>
+          <p>Australians use one big AI assistant more per person than people in any other country. I read 10 public reports, checked every number, and built an interactive story on why. Short answer: the kind of jobs we do, not income.</p>
           <div class="tags"><span class="tag">Data storytelling</span><span class="tag">Research</span><span class="tag">Fact checking</span><span class="tag">JavaScript</span><span class="tag">SVG charts</span></div>
           <div class="wbtns"><a class="wlink" href="australia-ai.html">Open the story</a><a class="wlink" href="https://github.com/Hemanth-Gowda23/Portfolio_Gowda23/blob/main/australia-ai.html" target="_blank" rel="noopener">View code</a></div>
           <details class="cs"><summary>See the case study</summary>
             <div class="cs-body">
-              <div><a class="cs-shot" href="australia-ai.html"><img src="story-preview.webp" alt="Opening screen of the data story: Australia uses Claude more per person than any country on earth, more than 6x" width="1200" height="700" loading="lazy"></a><div class="cs-cap">Tap to open the live story.</div></div>
+              <div><a class="cs-shot" href="australia-ai.html"><img src="story-preview.webp" alt="Opening screen of the data story: Australians use one big AI assistant more per person than any other country, more than 6 times the expected rate" width="1200" height="700" loading="lazy"></a><div class="cs-cap">Tap to open the live story.</div></div>
               <ul class="cs-steps">
                 <li><b>Question</b>Why does Australia use this AI tool more per person than any other country?</li>
-                <li><b>Data</b>10 public sources: Anthropic Economic Index reports, the Australia report, and news coverage.</li>
+                <li><b>Data</b>10 public sources: the AI maker's own usage reports, its Australia report, and news coverage.</li>
                 <li><b>What I did</b>Checked every number against its original source. Found and fixed one wrong claim before publishing. Built all charts by hand in SVG, with a tappable state map.</li>
                 <li><b>What it shows</b>It is the kind of jobs we do, not income. WA has high incomes but uses it about a third less than expected.</li>
               </ul>
@@ -642,9 +643,26 @@ h1{letter-spacing:-.04em;line-height:.9}
         <div class="wnum">2026</div>
         <div>
           <h3>Work order app (SRP Deck) <span class="badge">Live</span></h3>
-          <p>An app for contractors and crews to run jobs from request to invoice. I helped with the requirements, testing and launch, and built the reports on top.</p>
-          <div class="tags"><span class="tag">Requirements</span><span class="tag">PostgreSQL</span><span class="tag">Row level security</span><span class="tag">UAT</span><span class="tag">Power BI</span><span class="tag">Deployment</span></div>
-          <span class="wnote">Built under a commercial client, code not public. Happy to walk through the design.</span>
+          <p>A live work order app (CrewDeck and OrderDeck) that takes a job from request to invoice. I was the technical lead, with teammates on requirements, testing and data. I built the invoice system (PDF and Word, with GST), MFA and role based access, and an AI chat assistant on an LLM API. It worked in testing, and we launched it in FAQ mode to protect privacy. I also wrote the backup and incident plans.</p>
+          <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">PostgreSQL</span><span class="tag">MFA</span><span class="tag">Role based access</span><span class="tag">LLM API</span><span class="tag">Render</span></div>
+          <span class="wnote">Built at SRP Global Consultancy. Code is not public. Happy to walk through the design.</span>
+          <details class="cs"><summary>See the case study</summary>
+            <div class="cs-body">
+              <div><svg class="cs-flow" viewBox="0 0 420 130" role="img" aria-label="How a job moves through the app: request, then work order, then invoice">
+                <rect x="4" y="20" width="112" height="80" rx="10"/><text x="60" y="54" text-anchor="middle" class="n">01</text><text x="60" y="78" text-anchor="middle" class="t">REQUEST</text>
+                <path d="M120 60H148M140 52l8 8-8 8"/>
+                <rect x="154" y="20" width="112" height="80" rx="10"/><text x="210" y="54" text-anchor="middle" class="n">02</text><text x="210" y="78" text-anchor="middle" class="t">WORK ORDER</text>
+                <path d="M270 60H298M290 52l8 8-8 8"/>
+                <rect x="304" y="20" width="112" height="80" rx="10"/><text x="360" y="54" text-anchor="middle" class="n">03</text><text x="360" y="78" text-anchor="middle" class="t">INVOICE</text>
+              </svg><div class="cs-cap">One app from request to invoice. Code is not public.</div></div>
+              <ul class="cs-steps">
+                <li><b>Question</b>How can one app take a job from request to invoice?</li>
+                <li><b>Stack</b>React, Node.js, Express and PostgreSQL, hosted on Render.</li>
+                <li><b>What I did</b>Technical lead, with teammates on requirements, testing and data. Built the invoice system (PDF and Word, with GST), MFA and role based access, and an AI chat assistant on an LLM API. Wrote the backup and incident plans.</li>
+                <li><b>Privacy call</b>The AI assistant worked in testing. We launched it in FAQ mode to protect privacy.</li>
+              </ul>
+            </div>
+          </details>
         </div>
         <div class="wviz"><svg data-viz="grid" viewBox="0 0 200 76"></svg></div>
       </div>
@@ -662,7 +680,7 @@ h1{letter-spacing:-.04em;line-height:.9}
               <ul class="cs-steps">
                 <li><b>Question</b>How has the RBA cash rate moved since 1990, and what is the latest move?</li>
                 <li><b>Data</b>RBA Statistical Table F1, monthly, 1990 to 2026. Cleaned in Power Query.</li>
-                <li><b>What I built</b>DAX measures for current rate, month on month change and direction, running averages and period comparisons. KPI cards, a year slicer and a long run trend line.</li>
+                <li><b>What I built</b>DAX measures for the current rate, month on month change and its direction. KPI cards, a date slicer and a long run trend line.</li>
                 <li><b>What it shows</b>The floor at 0.10 percent in 2020 and 2021, then the fastest rise in three decades in 2022 to 2023.</li>
               </ul>
             </div>
@@ -676,7 +694,7 @@ h1{letter-spacing:-.04em;line-height:.9}
         <div>
           <h3>Smart Sprouts <span class="badge">IEEE paper</span></h3>
           <p>Smart watering for vertical farms using sensors and a Raspberry Pi. Published by IEEE in 2023.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">IoT</span><span class="tag">Fuzzy logic</span><span class="tag">Sensor data</span></div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">IoT</span><span class="tag">MQTT</span><span class="tag">Flask</span><span class="tag">Sensor data</span></div>
           <span class="wlink">View code</span>
         </div>
         <div class="wviz"><svg data-viz="pulse" viewBox="0 0 200 76"></svg></div>
@@ -700,8 +718,8 @@ h1{letter-spacing:-.04em;line-height:.9}
       <div>
         <h3>ICT Business Analyst</h3>
         <div class="org">SRP Global Consultancy, Melbourne</div>
-        <p>Worked between the business and the tech team. Wrote requirements, tested SRP Deck before launch, and cleaned client data in SQL and Power BI. In August I went to Sydney with a team of 3 and we checked 1,500+ assets in 11 days.</p>
-        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">PostgreSQL</span></div>
+        <p>Technical lead for SRP Deck, our live work order app, with teammates on requirements, testing and data. Built Power BI dashboards and weekly reports for the Director. In August I led a team of 3 on an 11 day asset audit in Sydney.</p>
+        <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span></div>
       </div>
     </div>
 
@@ -710,8 +728,8 @@ h1{letter-spacing:-.04em;line-height:.9}
       <div>
         <h3>Data Analyst, Intern</h3>
         <div class="org">SRP Global Consultancy, Melbourne</div>
-        <p>Built Power BI reports and cleaned data with Python and SQL. Helped plan the first version of SRP Deck.</p>
-        <div class="tags"><span class="tag">Data cleaning</span><span class="tag">Power Query</span><span class="tag">Forecasting</span><span class="tag">Validation</span></div>
+        <p>Built Power BI reports and cleaned data with Python and SQL. Built a time ledger app with Power Apps, SharePoint and Power Automate. Helped plan the first version of SRP Deck.</p>
+        <div class="tags"><span class="tag">Data cleaning</span><span class="tag">Power Query</span><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Power Automate</span></div>
       </div>
     </div>
 
@@ -720,8 +738,8 @@ h1{letter-spacing:-.04em;line-height:.9}
       <div>
         <h3>Data Analyst Intern (RMIT Work Integrated Learning)</h3>
         <div class="org">Woofya, Melbourne. Work featured at VET Expo 2025</div>
-        <p>RMIT placement at a pet health startup. Pulled data from APIs with Python and SQL, and built charts for the app.</p>
-        <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">REST APIs</span><span class="tag">Dashboards</span></div>
+        <p>RMIT placement at a pet health startup. Built PHP and Python/SQL pipelines that pulled data from a live API into a dashboard. Added an AI chatbot and AI summaries. Shown at VET Expo 2025.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">PHP</span><span class="tag">REST APIs</span><span class="tag">Dashboards</span><span class="tag">LLM API</span></div>
       </div>
     </div>
 
@@ -745,7 +763,7 @@ h1{letter-spacing:-.04em;line-height:.9}
       <h2>Credentials</h2>
     </div>
     <div class="creds rv">
-      <div class="cred"><div class="t">Master of Data Science</div><div class="s">RMIT University, 2024 to 2025</div></div>
+      <div class="cred"><div class="t">Master of Data Science</div><div class="s">RMIT University, 2024 to 2025. HD in Machine Learning and Data Science Project</div></div>
       <div class="cred"><div class="t">BE, Information Science</div><div class="s">Atria Institute (VTU), 2019 to 2023. First Class</div></div>
       <div class="cred"><div class="t">IEEE publication</div><div class="s">Smart Sprouts, peer reviewed 2023</div></div>
       <div class="cred"><div class="t">Microsoft PL-300</div><div class="s">Power BI Data Analyst, studying now</div></div>
@@ -804,12 +822,12 @@ tog.addEventListener('click',function(){
   if(lit){ root.removeAttribute('data-theme'); tog.textContent='Light'; }
   else { root.setAttribute('data-theme','light'); tog.textContent='Dark'; }
   try{ localStorage.setItem('hr-theme', lit?'dark':'light'); }catch(e){}
-  drawChart(true); drawSparks(); drawVizzes();
+  drawSparks(); drawVizzes();
 });
 
 /* ---------- marquee ---------- */
-var WORDS=['Power BI','SQL','Python','R','DAX','Power Query','PostgreSQL','ETL','GitHub Actions',
- 'pandas','REST APIs','Data quality','Forecasting','UAT','Process mapping'];
+var WORDS=['Power BI','DAX','Power Query','SQL','Python','pandas','Excel','Tableau','R',
+ 'PostgreSQL','React','Node.js','PHP','Power Automate','REST APIs','Git'];
 var track=document.getElementById('track');
 function fillTrack(){
   var half='';
@@ -910,135 +928,6 @@ if(!reduce && window.matchMedia('(hover:hover)').matches){
   }
 })();
 
-/* ---------- stat counters ---------- */
-function countTo(node,target,suffixFmt){
-  var start=null, dur=1500;
-  function frame(ts){
-    if(!start) start=ts;
-    var p=Math.min(1,(ts-start)/dur);
-    var e=1-Math.pow(1-p,3);
-    var v=Math.round(target*e);
-    node.textContent = suffixFmt ? v.toLocaleString('en-AU') : v;
-    if(p<1) requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
-var statsDone=false;
-var sio=new IntersectionObserver(function(es){
-  es.forEach(function(e){
-    if(e.isIntersecting && !statsDone){
-      statsDone=true;
-      countTo(document.getElementById('s1'),1500,true);
-      countTo(document.getElementById('s2'),4900,true);
-      countTo(document.getElementById('s3'),36,false);
-      countTo(document.getElementById('s4'),1,false);
-      sio.disconnect();
-    }
-  });
-},{threshold:.4});
-var statsNode=document.querySelector('.stats'); if(statsNode) sio.observe(statsNode);
-
-/* ---------- RBA chart ---------- */
-var D=[[1990,12.00],[1991,10.50],[1992,6.50],[1993,4.75],[1994,7.50],[1995,7.50],[1996,6.00],
- [1997,5.00],[1998,5.00],[1999,5.00],[2000,6.25],[2001,4.25],[2002,4.75],[2003,5.25],[2004,5.25],
- [2005,5.50],[2006,6.25],[2007,6.75],[2008,4.25],[2009,3.75],[2010,4.75],[2011,4.25],[2012,3.00],
- [2013,2.50],[2014,2.50],[2015,2.00],[2016,1.50],[2017,1.50],[2018,1.50],[2019,0.75],[2020,0.10],
- [2021,0.10],[2022,3.10],[2023,4.35],[2024,4.35],[2025,3.85],[2026,3.60]];
-var svg=document.getElementById('chart');
-var W,H,M,iw,ih,FS;
-var x0=D[0][0], x1=D[D.length-1][0], ymax=14;
-function dims(){
-  var narrow=window.innerWidth<700;
-  if(narrow){ W=560; H=440; M={t:24,r:16,b:44,l:46}; FS=15; }
-  else { W=960; H=330; M={t:26,r:24,b:38,l:48}; FS=10; }
-  iw=W-M.l-M.r; ih=H-M.t-M.b;
-  if(svg) svg.setAttribute('viewBox','0 0 '+W+' '+H);
-}
-dims();
-function X(y){ return M.l+(y-x0)/(x1-x0)*iw; }
-function Y(v){ return M.t+ih-(v/ymax)*ih; }
-var cpath,cdot,cline,chartDrawn=false;
-
-function drawChart(instant){
-  if(!svg) return;
-  dims();
-  while(svg.firstChild) svg.removeChild(svg.firstChild);
-  var Cl=css('--line'), C3=css('--ink3'), Cp=css('--plot'), i, g;
-
-  for(i=0;i<=7;i++){
-    var v=i*2, yy=Y(v);
-    svg.appendChild(el('line',{x1:M.l,y1:yy,x2:W-M.r,y2:yy,stroke:Cl,'stroke-width':i===0?1:.6,opacity:i===0?1:.7}));
-    g=el('text',{x:M.l-8,y:yy+FS*0.36,'text-anchor':'end',fill:C3,'font-size':FS,'font-family':'DM Mono, monospace'});
-    g.textContent=v+'%'; svg.appendChild(g);
-  }
-  var xstep=(window.innerWidth<700)?9:6;
-  for(i=0;i<D.length;i+=xstep){
-    var yr=D[i][0], xx=X(yr);
-    svg.appendChild(el('line',{x1:xx,y1:M.t,x2:xx,y2:M.t+ih,stroke:Cl,'stroke-width':.6,opacity:.5}));
-    g=el('text',{x:xx,y:H-FS,'text-anchor':'middle',fill:C3,'font-size':FS,'font-family':'DM Mono, monospace'});
-    g.textContent=yr; svg.appendChild(g);
-  }
-
-  var d=D.map(function(p,i){ return (i?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1); }).join(' ');
-  var grad=el('linearGradient',{id:'gfill',x1:'0',y1:'0',x2:'0',y2:'1'});
-  grad.appendChild(el('stop',{offset:'0','stop-color':Cp,'stop-opacity':'.22'}));
-  grad.appendChild(el('stop',{offset:'1','stop-color':Cp,'stop-opacity':'0'}));
-  var defs=el('defs',{}); defs.appendChild(grad); svg.appendChild(defs);
-  svg.appendChild(el('path',{d:d+' L'+X(x1).toFixed(1)+' '+Y(0)+' L'+X(x0).toFixed(1)+' '+Y(0)+' Z',fill:'url(#gfill)'}));
-
-  cpath=el('path',{d:d,fill:'none',stroke:Cp,'stroke-width':2.2,'stroke-linejoin':'round','stroke-linecap':'round'});
-  svg.appendChild(cpath);
-
-  var ANNS=(window.innerWidth<700)?[[2023,'4.35% peak']]:[[2020,'0.10% floor'],[2023,'4.35% peak']];
-  ANNS.forEach(function(a){
-    var pt=D[a[0]-x0]; if(!pt) return;
-    var ax=X(pt[0]), ay=Y(pt[1]);
-    svg.appendChild(el('circle',{cx:ax,cy:ay,r:FS*0.45,fill:'none',stroke:Cp,'stroke-width':1.4,opacity:.85}));
-    var tx=el('text',{x:ax,y:ay-FS*1.4,'text-anchor':'middle',fill:C3,'font-size':FS,'font-family':'DM Mono, monospace'});
-    tx.textContent=a[1];
-    svg.appendChild(tx);
-  });
-
-  cline=el('line',{x1:0,y1:M.t,x2:0,y2:M.t+ih,stroke:Cp,'stroke-width':1,opacity:0,'stroke-dasharray':'3 3'});
-  svg.appendChild(cline);
-  cdot=el('circle',{r:FS*0.45,fill:Cp,opacity:0});
-  svg.appendChild(cdot);
-
-  if(!instant && !reduce){
-    var L=cpath.getTotalLength();
-    cpath.style.strokeDasharray=L; cpath.style.strokeDashoffset=L;
-    cpath.getBoundingClientRect();
-    cpath.style.transition='stroke-dashoffset 2200ms cubic-bezier(.35,.05,.2,1)';
-    cpath.style.strokeDashoffset='0';
-  }
-}
-var read=document.getElementById('read');
-function hover(ev){
-  if(!svg||!cline) return;
-  var r=svg.getBoundingClientRect();
-  var cx=(ev.touches?ev.touches[0].clientX:ev.clientX);
-  var px=(cx-r.left)/r.width*W;
-  var yr=Math.round(x0+(px-M.l)/iw*(x1-x0));
-  if(yr<x0) yr=x0; if(yr>x1) yr=x1;
-  var pt=D[yr-x0]; if(!pt) return;
-  var PX=X(pt[0]), PY=Y(pt[1]);
-  cline.setAttribute('x1',PX); cline.setAttribute('x2',PX); cline.setAttribute('opacity',.6);
-  cdot.setAttribute('cx',PX); cdot.setAttribute('cy',PY); cdot.setAttribute('opacity',1);
-  read.innerHTML=pt[0]+' &nbsp;<b>'+pt[1].toFixed(2)+'%</b>';
-  read.classList.add('on');
-}
-function leaveChart(){
-  if(cline) cline.setAttribute('opacity',0);
-  if(cdot) cdot.setAttribute('opacity',0);
-  read.classList.remove('on');
-}
-if(svg){
-  svg.addEventListener('mousemove',hover);
-  svg.addEventListener('mouseleave',leaveChart);
-  svg.addEventListener('touchmove',function(e){ hover(e); },{passive:true});
-  svg.addEventListener('touchend',leaveChart);
-}
-
 /* ---------- sparklines ---------- */
 var SETS={rise:[3,4,4,6,7,7,9,11,12,14,15,17],clean:[9,3,14,4,12,5,10,9,9,10,10,10],
  pulse:[4,14,4,14,4,14,4,14,4,14,4,14],forecast:[6,7,8,8,9,10,11,13,14,16,17,19],
@@ -1111,7 +1000,6 @@ var io=new IntersectionObserver(function(es){
   es.forEach(function(e){
     if(e.isIntersecting){
       e.target.classList.add('in');
-      if(e.target.classList.contains('plot') && !chartDrawn){ chartDrawn=true; drawChart(false); }
       if(e.target.classList.contains('caps')) drawSparks();
       io.unobserve(e.target);
     }
@@ -1122,19 +1010,8 @@ document.querySelectorAll('.rv').forEach(function(n,i){
   io.observe(n);
 });
 
-var wasNarrow=window.innerWidth<700, rzt;
-window.addEventListener('resize',function(){
-  clearTimeout(rzt);
-  rzt=setTimeout(function(){
-    var n=window.innerWidth<700;
-    if(n!==wasNarrow){ wasNarrow=n; drawChart(true); }
-  },160);
-});
-
-drawChart(true);
 drawSparks();
 drawVizzes();
-setTimeout(function(){ if(!chartDrawn){ chartDrawn=true; drawChart(false); } }, reduce?200:2900);
 })();
 </script>
 
@@ -1170,9 +1047,7 @@ function say(t,pose,ms){bub.classList.remove('hide','pop');void bub.offsetWidth;
  roo.className='roo hop';void roo.offsetWidth;setTimeout(function(){roo.className='roo '+(pose||'');},620);
  clearTimeout(T);T=setTimeout(function(){roo.className='roo';bub.classList.add('hide');},ms||5000);}
 var lines={route:['That is Hemanth in pencil. Tap the auto and the tram!','point'],work:['G&#39;day! I&#39;m Roo. Try the new chapter 3: guess the gap first!','point'],
- live:['This chart is drawn live from 36 years of RBA data. Hover it!','point'],
  experience:['From intern to Business Analyst in a few months. Not bad, eh?','wave'],
- skills:['SQL, Python, Power BI, R. Hemanth uses them every day.','think'],
  credentials:['Master of Data Science, RMIT. And an IEEE paper.','point'],
  contact:['Liked what you saw? <a href="mailto:hemanthkvt9@gmail.com">Say hi to Hemanth</a>!','wave']};
 var hero=document.getElementById('hero'),seen={};
