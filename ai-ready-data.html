@@ -7,6 +7,9 @@
 <meta name="description" content="A 5-row table that can trip up an AI agent. Find the 4 traps, then see what changes when the data is clean. By Hemanth Rangaswamy, Data Analyst in Melbourne.">
 <meta property="og:title" content="Spot the 4 traps before the AI does">
 <meta property="og:description" content="5 rows. 4 traps. Can you find them all?">
+<meta property="og:image" content="https://hemanth-gowda23.github.io/Portfolio_Gowda23/ai-ready-data-og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Work+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
@@ -117,7 +120,7 @@ function tap(i,j,td){if(done)return;var k=traps[i+'-'+j];if(!k){td.classList.add
  if(found[k])return;found[k]=1;count++;
  document.querySelectorAll('#tbl tbody tr').forEach(function(tr,ri){tr.querySelectorAll('td').forEach(function(c,ci){if(traps[ri+'-'+ci]===k)c.classList.add('found');});});
  update();if(count===4)finish();}
-function update(){document.querySelectorAll('#dots i').forEach(function(d,i){d.classList.toggle('on',i<count);});document.getElementById('msg').textContent=count===4?'All 4 found. Sharper than most agents.':count+' of 4 traps found';}
+function update(){document.querySelectorAll('#dots i').forEach(function(d,i){d.classList.toggle('on',i<count);});document.getElementById('msg').textContent=count===4?'All 4 found. Nice work.':count+' of 4 traps found';}
 function finish(){done=true;Object.keys(traps).forEach(function(key){var p=key.split('-');var td=tb.rows[+p[0]].cells[+p[1]];td.classList.add('found');});['explain','aicard','cta'].forEach(function(id){document.getElementById(id).hidden=false;});setRuns(false);document.getElementById('reveal').hidden=true;}
 document.getElementById('reveal').addEventListener('click',function(){count=4;['dup','lower','dlvd','date'].forEach(function(k){found[k]=1;});update();document.getElementById('msg').textContent='Here they are.';finish();document.getElementById('explain').scrollIntoView({behavior:'smooth',block:'start'});});
 var messy=[["Run 1","1 late order"],["Run 2","2 late orders"],["Run 3","Not enough data"]];
